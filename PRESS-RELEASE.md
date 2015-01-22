@@ -1,4 +1,4 @@
-# Project Name #
+# iHammer #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -16,32 +16,23 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-  iHammer
+## Job Search ##
+  > iHammer is a job marketplace.
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
- Matching people to skilled people for awesome projects.
+## Matching skilled people to awesome projects ##
+> Find quality workers for your projects.
+> Gain independence doing the work you love.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
- 
+> A marketplace that matches skilled workers to the people who need them.
 
-## Problem ##
-  > Describe the problem your product solves.
+## Problem #
+> Finding skilled workers for projects that you need done can be difficult--review sites are inconsistent and the yellow pages are out of date. Likewise, it can often be a challenge to find work for independent contractors.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > iHammer brings together those who have skills to those who need those very skills to complete projects.
+  > Search for independent contractors that can complete your projects.
+  > Gain freedom as a skilled worker and earn extra income.
 
-## Quote from You ##
-  > A quote from a spokesperson in your company.
-
-## How to Get Started ##
-  > Describe how easy it is to get started.
-
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+## From Our Founders ##
+  > "We saw a real need for an efficient and convenient way to find skilled workers for a whole host of projects--home improvement, appliance repair, plumbing, electronic repair, etc. There was no centralized website that provided these services so we set out to create iHammer as a place to congregate the talent in the community with those who need it."
