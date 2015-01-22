@@ -36,5 +36,3 @@ Once the project moves into development, the press release can be used as a touc
 
 ## From Our Founders ##
   > "We saw a real need for an efficient and convenient way to find skilled workers for a whole host of projects--home improvement, appliance repair, plumbing, electronic repair, etc. There was no centralized website that provided these services so we set out to create iHammer as a place to congregate the talent in the community with those who need it."
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
