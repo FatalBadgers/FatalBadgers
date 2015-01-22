@@ -17,22 +17,22 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-  iHammer
+
+  > iHammer
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
- Matching people to skilled people for awesome projects.
+> Find quality workers for your projects
+> Gain independence doing the work you love
+> Matching people to skilled people for awesome projects.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
- 
+> A marketplace that matches skilled workers to the people who need them
 
 ## Problem ##
-  > Describe the problem your product solves.
+ > Finding skilled workers for projects that you need done can be difficult--review sites are inconsistent and the yellow pages are out of date. Likewise, it can often be a challenge to find work for independent contractors.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > 
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
