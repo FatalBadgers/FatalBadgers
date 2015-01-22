@@ -1,7 +1,6 @@
 
 
 
-
 -- ---
 -- Globals
 -- ---
@@ -42,52 +41,23 @@ CREATE TABLE `workers` (
 );
 
 -- ---
--- Table 'open_jobs'
+-- Table 'jobs'
 -- 
 -- ---
 
-DROP TABLE IF EXISTS `open_jobs`;
+DROP TABLE IF EXISTS `jobs`;
 		
-CREATE TABLE `open_jobs` (
+CREATE TABLE `jobs` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `title` VARCHAR(255) NULL DEFAULT NULL,
   `id_workers` INTEGER NULL DEFAULT NULL,
   `id_clients` INTEGER NULL DEFAULT NULL,
   `applicants` INTEGER NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'complete_jobs'
--- 
--- ---
-
-DROP TABLE IF EXISTS `complete_jobs`;
-		
-CREATE TABLE `complete_jobs` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
-  `title` VARCHAR(255) NULL DEFAULT NULL,
-  `completed_date` DATE NULL DEFAULT NULL,
-  `id_clients` INTEGER NULL DEFAULT NULL,
-  `id_workers` INTEGER NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
--- ---
--- Table 'contract'
--- 
--- ---
-
-DROP TABLE IF EXISTS `contract`;
-		
-CREATE TABLE `contract` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `budget` INTEGER NULL DEFAULT NULL,
-  `title` VARCHAR(255) NULL DEFAULT NULL,
   `summary` VARCHAR(255) NULL DEFAULT NULL,
   `skills_needed` VARCHAR(255) NULL DEFAULT NULL,
-  `id_clients` INTEGER NULL DEFAULT NULL,
-  `id_workers` INTEGER NULL DEFAULT NULL,
+  `completed_field` DATE NULL DEFAULT NULL,
+  `state` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -139,14 +109,10 @@ CREATE TABLE `worker_reviews` (
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE `open_jobs` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (`id`);
-ALTER TABLE `open_jobs` ADD FOREIGN KEY (id_clients) REFERENCES `clients` (`id`);
-ALTER TABLE `complete_jobs` ADD FOREIGN KEY (id_clients) REFERENCES `clients` (`id`);
-ALTER TABLE `complete_jobs` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (`id`);
-ALTER TABLE `contract` ADD FOREIGN KEY (id_clients) REFERENCES `clients` (`id`);
-ALTER TABLE `contract` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (`id`);
+ALTER TABLE `jobs` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (`id`);
+ALTER TABLE `jobs` ADD FOREIGN KEY (id_clients) REFERENCES `clients` (`id`);
 ALTER TABLE `workers_open_jobs` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (`id`);
-ALTER TABLE `workers_open_jobs` ADD FOREIGN KEY (id_open_jobs) REFERENCES `open_jobs` (`id`);
+ALTER TABLE `workers_open_jobs` ADD FOREIGN KEY (id_open_jobs) REFERENCES `jobs` (`id`);
 ALTER TABLE `client_reviews` ADD FOREIGN KEY (id_clients) REFERENCES `clients` (`id`);
 ALTER TABLE `worker_reviews` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (`id`);
 
@@ -156,9 +122,7 @@ ALTER TABLE `worker_reviews` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (
 
 -- ALTER TABLE `clients` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `workers` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `open_jobs` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `complete_jobs` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `contract` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `jobs` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `workers_open_jobs` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `client_reviews` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- ALTER TABLE `worker_reviews` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -171,12 +135,8 @@ ALTER TABLE `worker_reviews` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (
 -- ('','','','','');
 -- INSERT INTO `workers` (`id`,`name`,`location`,`email`,`avg_rating`) VALUES
 -- ('','','','','');
--- INSERT INTO `open_jobs` (`id`,`title`,`id_workers`,`id_clients`,`applicants`) VALUES
--- ('','','','','');
--- INSERT INTO `complete_jobs` (`id`,`title`,`completed_date`,`id_clients`,`id_workers`) VALUES
--- ('','','','','');
--- INSERT INTO `contract` (`id`,`budget`,`title`,`summary`,`skills_needed`,`id_clients`,`id_workers`) VALUES
--- ('','','','','','','');
+-- INSERT INTO `jobs` (`id`,`title`,`id_workers`,`id_clients`,`applicants`,`budget`,`summary`,`skills_needed`,`completed_field`,`state`) VALUES
+-- ('','','','','','','','','','');
 -- INSERT INTO `workers_open_jobs` (`id`,`id_workers`,`id_open_jobs`) VALUES
 -- ('','','');
 -- INSERT INTO `client_reviews` (`id`,`comment`,`id_clients`,`rating`) VALUES
