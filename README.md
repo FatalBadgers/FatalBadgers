@@ -1,8 +1,8 @@
-[![Stories in Ready](https://badge.waffle.io/fatalbadgers/fatalbadgers.png?label=ready&title=Ready)](http://waffle.io/fatalbadgers/fatalbadgers)
-
 # iHammer
 
 > A marketplace that matches skilled workers to the people who need them.
+
+[![Stories in Ready](https://badge.waffle.io/fatalbadgers/fatalbadgers.png?label=ready&title=Ready)](http://waffle.io/fatalbadgers/fatalbadgers)
 
 ## Team
 
