@@ -1,6 +1,6 @@
-# Project Name
+# iHammer
 
-> Pithy project description
+> A marketplace that matches skilled workers to the people who need them.
 
 ## Team
 
