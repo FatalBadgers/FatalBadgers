@@ -27,7 +27,7 @@
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/hackreactor-labs/<NAME_OF_REPO>.git
+git remote add upstream https://github.com/FatalBadgers/<NAME_OF_REPO>.git
 ```
 
 ### Cut a namespaced feature branch from dev
@@ -95,7 +95,7 @@ as possible.
 Once you are done fixing conflicts for a specific commit, run:
 
 ```
-git commit -m '<YOUR MESSAGE>'
+git commit -m '<YOUR_MESSAGE>'
 ```
 
 Once, you'll have entered your message in quotes, the merging process will continue.
