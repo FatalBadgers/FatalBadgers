@@ -6,10 +6,10 @@
 
 var errors = require('./components/errors');
 
-module.exports = function(app) {
+module.exports = function(app, express) {
 
   // Insert routes below
-  app.use('/api/things', require('./api/thing'));
+  // app.use('/api/things', require('./api/thing'));
   
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
@@ -22,8 +22,17 @@ module.exports = function(app) {
     });
 
 //YAN CODE STARTS
+//this should connect to two main routes: worker and clien
 
-  app.use('/worker', workerRoute);
-  app.use('/client', clientRoute);
+  
+  var workerRouter = express.Router();
+  var clientRouter = express.Router();
+
+  require('/worker/workerRoute.js', workerRouter);
+  require('/client/clientRoute.js', clientRouter);
   
 };
+
+
+//need some help identifying extra files in config
+//express.Router vs. app.METHOD?
