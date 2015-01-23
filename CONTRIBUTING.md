@@ -3,13 +3,8 @@
 ## General Workflow
 
 1. Fork the dev branch of the repo
-1. Make commits to your feature branch. Prefix each commit like so:
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [#<YOUR_ISSUE_NUMBER>]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
+1. Make commits to your feature branch. Prefix each commit with the issue number in parenthesis:
+  - (#1) Added a new feature
 1. When you've finished with your fix or feature, merge upstream changes into your branch. submit a [pull request][]
    directly to dev. Include a description of your changes.
 1. Your pull request will be reviewed by another maintainer. The point of code
@@ -30,37 +25,20 @@ Use github’s interface to make a fork of the repo, then add that repo as an up
 git remote add upstream https://github.com/FatalBadgers/<NAME_OF_REPO>.git
 ```
 
-### Cut a namespaced feature branch from dev
-
-Your branch should follow this naming convention:
-  - bug/...
-  - feat/...
-  - test/...
-  - doc/...
-  - refactor/...
+### Checkout the dev branch, if not there already
 
 These commands will help you do this:
 
 ``` bash
 
 # Creates your branch and brings you there
-git checkout -b `your-branch-name`
+git checkout -b `dev`
 ```
 
 ### Make commits to your feature branch. 
 
-Prefix each commit like so
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
-
-Make changes and commits on your branch, and make sure that you
-only make changes that are relevant to this branch. If you find
-yourself making unrelated changes, make a new branch for those
-changes.
+Prefix each commit with the issue number
+  - (#2) Added a new feature
 
 #### Commit Message Guidelines
 
@@ -151,17 +129,3 @@ This is just to help you organize your process
 
 If you follow all of these guidelines and make good changes, you should have
 no problem getting your changes merged in.
-
-
-<!-- Links -->
-[style guide]: https://github.com/hackreactor-labs/style-guide
-[n-queens]: https://github.com/hackreactor-labs/n-queens
-[Underbar]: https://github.com/hackreactor-labs/underbar
-[curriculum workflow diagram]: http://i.imgur.com/p0e4tQK.png
-[cons of merge]: https://f.cloud.github.com/assets/1577682/1458274/1391ac28-435e-11e3-88b6-69c85029c978.png
-[Bookstrap]: https://github.com/hackreactor/bookstrap
-[Taser]: https://github.com/hackreactor/bookstrap
-[tools workflow diagram]: http://i.imgur.com/kzlrDj7.png
-[Git Flow]: http://nvie.com/posts/a-successful-git-branching-model/
-[GitHub Flow]: http://scottchacon.com/2011/08/31/github-flow.html
-[GitHub Merge Conflicts]: http://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
