@@ -9,8 +9,13 @@ var errors = require('./components/errors');
 module.exports = function(app, express) {
 
   // Insert routes below
+<<<<<<< HEAD
   // app.use('/api/things', require('./api/thing'));
   
+=======
+  app.use('/api/mocks', require('./api/mocks'));
+
+>>>>>>> 79e801879498cd2043a5b25e438ddc09de825df2
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
