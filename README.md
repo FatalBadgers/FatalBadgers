@@ -4,6 +4,8 @@
 
 [![Stories in Ready](https://badge.waffle.io/fatalbadgers/fatalbadgers.png?label=ready&title=Ready)](http://waffle.io/fatalbadgers/fatalbadgers)
 
+[![Build Status](https://travis-ci.org/FatalBadgers/FatalBadgers.svg?branch=dev)](https://travis-ci.org/FatalBadgers/FatalBadgers)
+
 ## Team
 
   - __Product Owner__: Yan Fan
