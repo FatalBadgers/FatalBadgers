@@ -20,4 +20,10 @@ module.exports = function(app) {
     .get(function(req, res) {
       res.sendfile(app.get('appPath') + '/index.html');
     });
+
+//YAN CODE STARTS
+
+  app.use('/worker', workerRoute);
+  app.use('/client', clientRoute);
+  
 };
