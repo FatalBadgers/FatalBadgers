@@ -12,10 +12,10 @@ var path = require('path');
 var config = require('./environment');
 
 // --- Unused dependencies --- //
-// var favicon = require('serve-favicon');
-// var morgan = require('morgan');
-// var cookieParser = require('cookie-parser');
-// var methodOverride = require('method-override');
+var favicon = require('serve-favicon');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
 
 module.exports = function(app) {
   var env = app.get('env');
@@ -27,17 +27,17 @@ module.exports = function(app) {
   app.use(bodyParser.json());
 
   // --- Unused methods --- //
-  // app.use(compression());
-  // app.use(methodOverride());
-  // app.use(cookieParser());
+  app.use(compression());
+  app.use(methodOverride());
+  app.use(cookieParser());
   
   if ('production' === env) {
     app.use(express.static(path.join(config.root, 'public')));
     app.set('appPath', config.root + '/public');
     
     // --- Unused methods --- //
-    // app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
-    // app.use(morgan('dev'));
+    app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
+    app.use(morgan('dev'));
 
   }
 
@@ -49,6 +49,6 @@ module.exports = function(app) {
     app.use(errorHandler()); // Error handler - has to be last
     
     // --- Unused methods --- //
-    // app.use(morgan('dev'));
+    app.use(morgan('dev'));
   }
 };
