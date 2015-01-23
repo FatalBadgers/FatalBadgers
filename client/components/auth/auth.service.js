@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('badgerApp')
+  // Set currentUser to an empty object and then they check if there is a cookie named (?) 'token'.
+  // If it is then they call the User service method get, this should return a currentUser object.
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
@@ -8,18 +10,13 @@ angular.module('badgerApp')
     }
 
     return {
-
-      /**
-       * Authenticate user and save token
-       *
-       * @param  {Object}   user     - login info
-       * @param  {Function} callback - optional
-       * @return {Promise}
-       */
+      // Authenticates user and saves token.
+      // Returns a {Promise}.
       login: function(user, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
+        // TODO $hppt.post path will need to be created on the sever side, or changed to the correct path here once defined server side.
         $http.post('/auth/local', {
           email: user.email,
           password: user.password,
@@ -40,23 +37,14 @@ angular.module('badgerApp')
         return deferred.promise;
       },
 
-      /**
-       * Delete access token and user info
-       *
-       * @param  {Function}
-       */
+      // Delete access token and user info.
       logout: function() {
         $cookieStore.remove('token');
         currentUser = {};
       },
 
-      /**
-       * Create a new user
-       *
-       * @param  {Object}   user     - user info
-       * @param  {Function} callback - optional
-       * @return {Promise}
-       */
+      // Creates a new user.
+      // Returns a {Promise}.
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
 
@@ -72,14 +60,8 @@ angular.module('badgerApp')
           }.bind(this)).$promise;
       },
 
-      /**
-       * Change password
-       *
-       * @param  {String}   oldPassword
-       * @param  {String}   newPassword
-       * @param  {Function} callback    - optional
-       * @return {Promise}
-       */
+      // Changes a user's password.
+      // Returns a {Promise}.
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
 
@@ -93,27 +75,19 @@ angular.module('badgerApp')
         }).$promise;
       },
 
-      /**
-       * Gets all available info on authenticated user
-       *
-       * @return {Object} user
-       */
+      // Gets all available info on authenticated user
+      // Returns a user {Object}
       getCurrentUser: function() {
         return currentUser;
       },
 
-      /**
-       * Check if a user is logged in
-       *
-       * @return {Boolean}
-       */
+      // Check if a user is logged in.
+      // Returns a boolean.
       isLoggedIn: function() {
         return currentUser.hasOwnProperty('role');
       },
 
-      /**
-       * Waits for currentUser to resolve before checking if user is logged in
-       */
+      // Waits for currentUser to resolve before checking if user is logged in
       isLoggedInAsync: function(cb) {
         if(currentUser.hasOwnProperty('$promise')) {
           currentUser.$promise.then(function() {
@@ -128,18 +102,13 @@ angular.module('badgerApp')
         }
       },
 
-      /**
-       * Check if a user is an admin
-       *
-       * @return {Boolean}
-       */
+      // Checks if a user is an admin.
+      // Returns a boolean.
       isAdmin: function() {
         return currentUser.role === 'admin';
       },
 
-      /**
-       * Get auth token
-       */
+      // Gets auth token.
       getToken: function() {
         return $cookieStore.get('token');
       }
