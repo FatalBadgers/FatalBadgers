@@ -10,11 +10,11 @@
 
 -- ---
 -- Table 'clients'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `clients`;
-		
+
 CREATE TABLE `clients` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `name` VARCHAR(255) NULL DEFAULT NULL,
@@ -26,11 +26,11 @@ CREATE TABLE `clients` (
 
 -- ---
 -- Table 'workers'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `workers`;
-		
+
 CREATE TABLE `workers` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `name` VARCHAR(255) NULL DEFAULT NULL,
@@ -42,11 +42,11 @@ CREATE TABLE `workers` (
 
 -- ---
 -- Table 'jobs'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `jobs`;
-		
+
 CREATE TABLE `jobs` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `title` VARCHAR(255) NULL DEFAULT NULL,
@@ -56,32 +56,31 @@ CREATE TABLE `jobs` (
   `budget` INTEGER NULL DEFAULT NULL,
   `summary` VARCHAR(255) NULL DEFAULT NULL,
   `skills_needed` VARCHAR(255) NULL DEFAULT NULL,
-  `completed_field` DATE NULL DEFAULT NULL,
-  `state` VARCHAR(255) NULL DEFAULT NULL,
+  `status` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
 -- ---
 -- Table 'workers_open_jobs'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `workers_open_jobs`;
-		
+
 CREATE TABLE `workers_open_jobs` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `id_workers` INTEGER NULL DEFAULT NULL,
-  `id_open_jobs` INTEGER NULL DEFAULT NULL,
+  `id_jobs` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
 -- ---
 -- Table 'client_reviews'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `client_reviews`;
-		
+
 CREATE TABLE `client_reviews` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `comment` VARCHAR(255) NULL DEFAULT NULL,
@@ -92,11 +91,11 @@ CREATE TABLE `client_reviews` (
 
 -- ---
 -- Table 'worker_reviews'
--- 
+--
 -- ---
 
 DROP TABLE IF EXISTS `worker_reviews`;
-		
+
 CREATE TABLE `worker_reviews` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `comment` VARCHAR(255) NULL DEFAULT NULL,
@@ -106,7 +105,7 @@ CREATE TABLE `worker_reviews` (
 );
 
 -- ---
--- Foreign Keys 
+-- Foreign Keys
 -- ---
 
 ALTER TABLE `jobs` ADD FOREIGN KEY (id_workers) REFERENCES `workers` (`id`);

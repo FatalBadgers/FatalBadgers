@@ -1,10 +1,16 @@
-.thing-form {
+/*.thing-form {
     margin: 20px 0;
+}*/
+
+img .prof{
+    width: 250px;
 }
 
 #banner {
     border-bottom: none;
-    margin-top: -20px;
+    background-color: black;
+    position: static;
+/*    margin-top: -20px;*/
 }
 
 #banner h1 {
@@ -13,18 +19,29 @@
     letter-spacing: -1px;
 }
 
-.hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+.team{
+    padding: 20px;
+    background-color: grey;
 }
 
-.footer {
+.hero-unit {
+    position: relative;
+/*    padding: 30px 15px;*/
+    color: #F5F5F5;
+    background-color: black;
+    text-align: center;
+ /*   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    background: #4393B9;*/
+}
+
+.about{
+    background-color: grey;
+    padding: 20px;
+}
+
+/*.footer {
     text-align: center;
     padding: 30px 0;
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
-}
+}*/
