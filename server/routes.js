@@ -5,6 +5,7 @@
 'use strict';
 
 var errors = require('./components/errors');
+var express = require('express');
 
 module.exports = function(app) {
   app.route('/')
@@ -28,5 +29,5 @@ module.exports = function(app) {
 
   var workerRouter = express.Router();
   app.use('/worker', workerRouter);
-  require('./worker/workerRouter.js')(workerRouter);
+  require('./worker/workerRoute.js')(workerRouter);
 };
