@@ -5,18 +5,13 @@ angular.module('badgerApp')
     $scope.user = {};
     $scope.errors = {};
 
-  	$scope.accountOptions = [
-  		// The key is what the server will be expecting to define user account type.
-  		// The value is what text will be displayed on the login screen.
-  		{ value: 'client', text: "I need to find skilled workers." },
-  		{ value: 'worker', text: "I have skills and I'm looking for work." }
-  	];
+  	$scope.accountOptions = [ 'Client', 'Worker' ];
 
   	// Sets default value for account type to first value in accountOptions.
-  	$scope.user.accountType = $scope.accountOptions[0].text;
+  	$scope.user.accountType = $scope.accountOptions[0];
 
-  	// 
     $scope.login = function(form) {
+    	console.log(form)
       $scope.submitted = true;
 
       if(form.$valid) {
