@@ -22,6 +22,8 @@ var server = require('http').createServer(app);
 
 require('./config/express')(app);
 require('./routes')(app, express);
+//require a dummy api js--one file
+
 //routes is where we are telling the site what to do
 
 // Start server
