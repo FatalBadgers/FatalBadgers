@@ -7,6 +7,10 @@
 var errors = require('./components/errors');
 
 module.exports = function(app) {
+  app.route('/')
+    .get(function(req, res){
+      res.sendfile(app.get('appPath') + '/index.html');
+    });
 
   // Insert routes below
   app.use('/api/mocks', require('./api/mocks'));
@@ -16,8 +20,13 @@ module.exports = function(app) {
    .get(errors[404]);
 
   // All other routes should redirect to the index.html
-  app.route('/*')
-    .get(function(req, res) {
-      res.sendfile(app.get('appPath') + '/index.html');
-    });
+  //this needs to get put at the very end of our routes
+  // app.route('/*')
+  //   .get(function(req, res) {
+  //     res.sendfile(app.get('appPath') + '/index.html');
+  //   });
+
+  var workerRouter = express.Router();
+  app.use('/worker', workerRouter);
+  require('./worker/workerRouter.js')(workerRouter);
 };
