@@ -19,6 +19,7 @@ var config = require('./config/environment');
 
 var server = require('http').createServer(app);
 
+
 require('./config/express')(app);
 require('./routes')(app, express);
 //routes is where we are telling the site what to do
