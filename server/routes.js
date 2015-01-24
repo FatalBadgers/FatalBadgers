@@ -3,19 +3,21 @@
  */
 
 'use strict';
+var express = require('express');
 
 var errors = require('./components/errors');
 
+
 module.exports = function(app, express) {
+  var workerRouter = express.Router();
 
   // Insert routes below
-<<<<<<< HEAD
+
   // app.use('/api/things', require('./api/thing'));
   
-=======
-  app.use('/api/mocks', require('./api/mocks'));
 
->>>>>>> 79e801879498cd2043a5b25e438ddc09de825df2
+  // app.use('/api/mocks', require('./api/mocks'));
+  
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
@@ -26,15 +28,10 @@ module.exports = function(app, express) {
       res.sendfile(app.get('appPath') + '/index.html');
     });
 
-//YAN CODE STARTS
-//this should connect to two main routes: worker and clien
+//this should connect to two main routes: worker and client
 
-  
-  var workerRouter = express.Router();
-  var clientRouter = express.Router();
-
-  require('/worker/workerRoute.js', workerRouter);
-  require('/client/clientRoute.js', clientRouter);
+  app.use('/api/workers', workerRouter);
+  require('./worker/workerRoute.js', workerRouter);
   
 };
 
