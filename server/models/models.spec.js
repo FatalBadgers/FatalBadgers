@@ -14,6 +14,8 @@ describe("MySQL Database tests", function() {
     // Let's insert a message into the db
     var clientId;
     var name;
+
+    // insert new client record in MySQL
     models.Clients.create({
       name: 'Walgreens',
       location: 'St. Louis',
@@ -24,9 +26,11 @@ describe("MySQL Database tests", function() {
         console.log(err);
       }
 
+      // clientId and name of client created
       clientId = client.id;
       name = client.name;
 
+      // delete client record just created in MySQL
       models.Clients.destroy({
         where: {
           id: clientId
@@ -35,6 +39,8 @@ describe("MySQL Database tests", function() {
         if(!!err) {
           console.log(err);
         }
+
+        // determine if name of inserted database matches what was supposted to be inserted
         name.should.equal("Walgreens");
         done();
       })

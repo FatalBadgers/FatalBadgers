@@ -1,6 +1,7 @@
 var Sequelize = require("sequelize");
 exports.ihammerDatabase = require('../config/environment').mysql;
 
+// define the workers database
 exports.Workers = exports.ihammerDatabase.define("workers", {
   name: Sequelize.STRING,
   location: Sequelize.STRING,
@@ -8,6 +9,7 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
   'avg_rating': Sequelize.STRING
 });
 
+// define the clients database
 exports.Clients = exports.ihammerDatabase.define("clients", {
   name: Sequelize.STRING,
   location: Sequelize.STRING,
@@ -15,19 +17,23 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
   'avg_rating': Sequelize.STRING
 });
 
+// define the client_review database
 exports.ClientReviews = exports.ihammerDatabase.define("client_reviews", {
   comment: Sequelize.STRING,
   rating: Sequelize.INTEGER
 });
 
+// define the worker_reviews database
 exports.WorkerReviews = exports.ihammerDatabase.define("worker_reviews", {
   comment: Sequelize.STRING,
   rating: Sequelize.INTEGER
 });
 
+// define the workers_jobs database
 exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {
 });
 
+// define the jobs database
 exports.Jobs = exports.ihammerDatabase.define("jobs", {
   title: Sequelize.STRING,
   applicants: Sequelize.INTEGER,
@@ -35,6 +41,55 @@ exports.Jobs = exports.ihammerDatabase.define("jobs", {
   summary: Sequelize.STRING,
   'skills_needed': Sequelize.STRING,
   status: Sequelize.STRING
+});
+
+// create all associations between databases specified above
+exports.Workers.sync(({force:true})).complete(function(err) {
+  if(err) {
+    console.log('Error creating Workers:', err)
+  } else {
+    console.log('Workers database created successfully.')
+  }
+});
+
+exports.Clients.sync(({force:true})).complete(function(err) {
+  if(err) {
+    console.log('Error creating Clients:', err)
+  } else {
+    console.log('Clients database created successfully.')
+  }
+});
+
+exports.WorkerReviews.sync(({force:true})).complete(function(err) {
+  if(err) {
+    console.log('Error creating Worker Reviews:', err)
+  } else {
+    console.log('Worker Reviews database created successfully.')
+  }
+});
+
+exports.ClientReviews.sync(({force:true})).complete(function(err) {
+  if(err) {
+    console.log('Error creating Client Reviews:', err)
+  } else {
+    console.log('Client Reviews database created successfully.')
+  }
+});
+
+exports.WorkersJobs.sync(({force:true})).complete(function(err) {
+  if(err) {
+    console.log('Error creating Workers Jobs:', err)
+  } else {
+    console.log('Workers Jobs database created successfully.')
+  }
+});
+
+exports.Jobs.sync(({force:true})).complete(function(err) {
+  if(err) {
+    console.log('Error creating Jobs:', err)
+  } else {
+    console.log('Jobs database created successfully.')
+  }
 });
 
 //One to many relationship from workers to worker_reviews
@@ -45,24 +100,13 @@ exports.WorkerReviews.belongsTo(exports.Workers);
 exports.Clients.hasMany(exports.ClientReviews);
 exports.ClientReviews.belongsTo(exports.Clients);
 
-//Many to many relationship from workers to jobs
-exports.Workers.belongsToMany(exports.Jobs, { through: exports.WorkersJobs });
-exports.Jobs.belongsToMany(exports.Workers, { through: exports.WorkersJobs });
-
-//One to many relationship from jobs to workers
-exports.Workers.hasMany(exports.Jobs);
-exports.Jobs.belongsTo(exports.Workers);
-
 //One to one relationship from jobs to clients
 exports.Jobs.hasOne(exports.Clients);
 exports.Clients.belongsTo(exports.Jobs);
 
-exports.Workers.sync();
-exports.Clients.sync();
-exports.WorkerReviews.sync();
-exports.ClientReviews.sync();
-exports.Jobs.sync();
-exports.WorkersJobs.sync();
+//Many to many relationship from workers to jobs
+exports.Workers.hasMany(exports.Jobs, { through: "workers_jobs" });
+exports.Jobs.belongsToMany(exports.Workers, { through: "workers_jobs" });
 
 exports.ihammerDatabase
   .authenticate()
