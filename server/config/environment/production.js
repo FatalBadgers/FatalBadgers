@@ -18,5 +18,3 @@ exports.mysql = new Sequelize('ihammer', 'root', '', {
   port: '3306',
   dialect: 'mysql'
 });
-
-exports.seedDB = true;

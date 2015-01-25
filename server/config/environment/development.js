@@ -11,4 +11,4 @@ exports.mysql = new Sequelize('ihammer', 'root', '', {
 
 exports.seedDB = true;
 
-exports.seedDB = 80;
+exports.port = 80;
