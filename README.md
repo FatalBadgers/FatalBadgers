@@ -47,15 +47,6 @@ npm install
 bower install
 ```
 
-### Setting Up the Database
-
-With mysql installed, use the user root and an empty password to create a database called 'ihammer':
-
-```sh
-mysql -u root
-> create database ihammer;
-```
-
 ### Unit and Integration tests
 
 Running grunt test will run the client and server unit tests with karma and mocha.

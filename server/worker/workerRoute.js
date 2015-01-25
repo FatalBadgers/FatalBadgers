@@ -1,3 +1,5 @@
+//this stores all of our express routes for workers
+
 var express = require('express');
 var workerController = require('./workerController.js');
 
@@ -10,11 +12,9 @@ module.exports = function(app){
   app.get('/signedin', workerController.checkAuth);
   app.get('/viewprofile', workerController.viewprofile);
   app.post('/editprofile', workerController.editprofile);
-  app.get('/history', workerController.gethistory);
-  app.post('/endcontract', workerController.endcontract);
-  
-
   //get for contract history
   //post for contract application
   
 }
+//use express.Router() to create modular, mountable route handlers
+//this way, we can go to ~~~.com/worker/profile, etc.
