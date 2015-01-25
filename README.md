@@ -27,7 +27,7 @@
 ```sh
 grunt serve
 ```
-Browser window will open at localhost:9000 with the app.
+Browser window will open at localhost with the app.
 
 ## Requirements
 

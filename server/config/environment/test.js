@@ -9,4 +9,10 @@ exports.mysql = new Sequelize('ihammer', 'root', '', {
   dialect: 'mysql'
 });
 
-exports.seedDB = true;
+module.exports = {
+  // Server IP
+  seedDB: true,
+
+  // Server port
+  port: 80
+};
