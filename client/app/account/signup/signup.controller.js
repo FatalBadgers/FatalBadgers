@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('badgerApp')
-  .controller('SignupCtrl', function ($scope) {
+  .controller('SignupCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
