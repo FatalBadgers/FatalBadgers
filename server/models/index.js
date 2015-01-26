@@ -44,7 +44,7 @@ exports.Jobs = exports.ihammerDatabase.define("jobs", {
 });
 
 // create all associations between databases specified above
-exports.Workers.sync(({force:true})).complete(function(err) {
+exports.Workers.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Workers:', err)
   } else {
@@ -52,7 +52,7 @@ exports.Workers.sync(({force:true})).complete(function(err) {
   }
 });
 
-exports.Clients.sync(({force:true})).complete(function(err) {
+exports.Clients.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Clients:', err)
   } else {
@@ -60,7 +60,7 @@ exports.Clients.sync(({force:true})).complete(function(err) {
   }
 });
 
-exports.WorkerReviews.sync(({force:true})).complete(function(err) {
+exports.WorkerReviews.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Worker Reviews:', err)
   } else {
@@ -68,7 +68,7 @@ exports.WorkerReviews.sync(({force:true})).complete(function(err) {
   }
 });
 
-exports.ClientReviews.sync(({force:true})).complete(function(err) {
+exports.ClientReviews.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Client Reviews:', err)
   } else {
@@ -76,7 +76,7 @@ exports.ClientReviews.sync(({force:true})).complete(function(err) {
   }
 });
 
-exports.WorkersJobs.sync(({force:true})).complete(function(err) {
+exports.WorkersJobs.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Workers Jobs:', err)
   } else {
@@ -84,7 +84,7 @@ exports.WorkersJobs.sync(({force:true})).complete(function(err) {
   }
 });
 
-exports.Jobs.sync(({force:true})).complete(function(err) {
+exports.Jobs.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Jobs:', err)
   } else {
