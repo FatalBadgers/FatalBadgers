@@ -11,6 +11,7 @@ describe('Controller: SignupCtrl', function () {
     $rootScope = $injector.get('$rootScope');
     $controller = $injector.get('$controller');
 
+    $form = $("<form />");
     $scope = $rootScope.$new();
 
     createController = function() {
@@ -18,18 +19,16 @@ describe('Controller: SignupCtrl', function () {
         $scope: $scope
       });
     };
+    createController();
   }));
 
   it('should default to account type client', function () {
-    createController();
     expect($scope.user.accountType).toEqual('Client');
   });
 
   it('should display an error if email is left blank', function () {
-    createController();
-    $form = $("<form />");
     $form.trigger("submit");
     expect(!!$('.help-block')).toEqual(true);
   });
-  
+
 });
