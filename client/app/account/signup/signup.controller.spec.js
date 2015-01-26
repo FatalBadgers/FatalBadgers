@@ -8,7 +8,7 @@ describe('Controller: SignupCtrl', function () {
   var SignupCtrl, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $scope) {
+  beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     SignupCtrl = $controller('SignupCtrl', {
       $scope: scope
