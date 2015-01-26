@@ -15,7 +15,13 @@ describe('Controller: SignupCtrl', function () {
     });
   }));
 
-  it('should ...', function () {
-    expect(1).toEqual(1);
+  it('should default to account type client', function () {
+    expect($scope.user.accountType).toEqual('Client');
   });
+
+  it('should display an error if email is left blank', function () {
+    $scope.register();
+    expect($('.help-block')).toEqual(true);
+  });
+  
 });
