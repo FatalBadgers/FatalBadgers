@@ -4,6 +4,7 @@ exports.ihammerDatabase = require('../config/environment').mysql;
 // define the workers database
 exports.Workers = exports.ihammerDatabase.define("workers", {
   name: Sequelize.STRING,
+  password: Sequelize.STRING,
   location: Sequelize.STRING,
   email: Sequelize.STRING,
   'avg_rating': Sequelize.STRING
@@ -12,6 +13,7 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
 // define the clients database
 exports.Clients = exports.ihammerDatabase.define("clients", {
   name: Sequelize.STRING,
+  password: Sequelize.STRING,
   location: Sequelize.STRING,
   email: Sequelize.STRING,
   'avg_rating': Sequelize.STRING
