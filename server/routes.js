@@ -22,10 +22,10 @@ module.exports = function(app) {
 
   // All other routes should redirect to the index.html
   //this needs to get put at the very end of our routes
-  // app.route('/*')
-  //   .get(function(req, res) {
-  //     res.sendfile(app.get('appPath') + '/index.html');
-  //   });
+  app.route('/*')
+    .get(function(req, res) {
+      res.sendfile(app.get('appPath') + '/index.html');
+    });
 
   var workerRouter = express.Router();
   app.use('/worker', workerRouter);
