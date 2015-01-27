@@ -8,10 +8,10 @@ angular.module('badgerApp')
       // TODO /:controller may need to be defined here. If undefined, the url will default to '/api/isers/:id/'
     },
     {
-      changePassword: {
-        method: 'PUT',
+      editProfile: {
+        method: 'POST',
         params: {
-          controller:'password'
+          controller:'editprofile'
         }
       },
       // This will make a get request to /api/users/me in the /api/user/index.js (default file).
