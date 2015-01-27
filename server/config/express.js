@@ -42,7 +42,7 @@ module.exports = function(app) {
     app.use(errorHandler()); // Error handler - has to be last
   }
 
-  if ('development' === env || 'test' === env || 'staging' === env) {
+  if ('development' === env || 'test' === env) {
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(path.join(config.root, 'client')));
