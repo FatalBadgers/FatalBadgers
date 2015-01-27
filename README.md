@@ -74,7 +74,7 @@ Use grunt test:e2e to have protractor go through tests located in the e2e folder
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/FatalBadgers/FatalBadgers/issues)
 
 
 ## Contributing
