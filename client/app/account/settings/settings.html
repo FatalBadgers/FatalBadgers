@@ -5,28 +5,33 @@
     <h1>Account Settings</h1>
     <hr>
 
-    <form class="form" name="form" ng-submit="updateProfile(form)" novalidate>
+    <form class="form" name="profileForm" ng-submit="updateProfile(profileForm)">
       <label><h3>Update Profile</h3></label>
 
       <div class="form-group">
-        <label>What is Your Name</label>
-        <input class="form-control" ng-model="user.name">
+        <label>What is Your Name?</label>
+        <input class="form-control has-warning" ng-model="user.name" name="name" required>
+        <span class="help-block" ng-show="profileForm.name.$error.required">Name cannot be blank.</span>
       </div>
 
       <div class="form-group">
         <label>Where do you live?</label>
-        <input class="form-control" ng-model="user.location">
+        <input class="form-control has-warning" ng-model="user.location" name="location" required>
+        <span class="help-block" ng-show="profileForm.location.$error.required">Location cannot be blank.</span>
       </div>
 
       <div id="workerQuestions" ng-show="isWorker">
         <div class="form-group">
           <label>What are your skills/professions?</label>
-          <input class="form-control" ng-model="user.skills">
+          <input class="form-control has-warning" ng-model="user.skills" name="skills" required>
+          <span class="help-block" ng-show="profileForm.skills.$error.required">Skills/profession cannot be blank.</span>
         </div>
 
         <div class="form-group">
           <label>What is your hourly rate?</label>
-          <input class="form-control" ng-model="user.rate">
+          <input class="form-control has-warning" ng-model="user.rate" name="rate" ng-pattern="/(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/" required>
+          <span class="help-block" ng-show="profileForm.rate.$error.pattern">Please enter a valid number.</span>
+          <span class="help-block" ng-show="profileForm.rate.$error.required">Hourly rate cannot be blank.</span>
         </div>
 
         <div class="form-group">
