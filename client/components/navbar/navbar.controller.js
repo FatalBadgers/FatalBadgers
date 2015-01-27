@@ -2,10 +2,10 @@
 
 angular.module('badgerApp')
   .controller('NavbarCtrl', function ($scope, $location) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
+    $scope.menu = [
+      { 'title': 'Home', 'link': '/' },
+      { 'title': 'Our Team', 'link': '/about' }
+    ];
 
     $scope.isCollapsed = true;
     // $scope.isLoggedIn = Auth.isLoggedIn;
