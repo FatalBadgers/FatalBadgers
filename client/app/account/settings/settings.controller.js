@@ -2,13 +2,19 @@
 
 angular.module('badgerApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
-  	// TODO: This section is for testing only, delete this before deployment.
+  	
+  // ************************************************************************************
+  // TODO: This section is for testing only, delete this before deployment.
   	var exampleClient = {
+  		name: 'Test Client',
+  		location: 'Test, IS',
     	email: 'test@test.com',
       password: 'test',
-      accountType: 'Worker'
+      accountType: 'Client'
     };
     var exampleWorker = {
+    	name: 'Test Worker',
+  		location: 'Test, IS',
     	email: 'test@test.com',
       password: 'test',
       accountType: 'Worker',
@@ -16,10 +22,11 @@ angular.module('badgerApp')
       rate: '$69 / hour',
       advert: "I'm okay. I sleep all night and I work all day."
     };
-    Auth.createUser(exampleWorker);
-    console.log(Auth.getCurrentUser());
+    // Once user creation is supported, we can test with the following line:
+    // Auth.createUser(exampleWorker);
     $scope.user = exampleWorker;
-    // Test section ends here.
+  // Test section ends here.
+  // ************************************************************************************
 
     $scope.errors = {};
     $scope.minPasswordLength = 3;
@@ -30,7 +37,6 @@ angular.module('badgerApp')
     };
 
     $scope.changePassword = function(form) {
-    	console.log($scope.user);
       $scope.submitted = true;
       if(form.$valid) {
         Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
