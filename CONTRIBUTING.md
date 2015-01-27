@@ -102,6 +102,8 @@ else, just repeat again.
 
 Thanks for contributing!
 
+If your pull request is merged, the changes will be visible automatically at [staging server] (http://staging.ihammer.org)
+
 ### Guidelines
 
 1. Uphold the current code standard:
