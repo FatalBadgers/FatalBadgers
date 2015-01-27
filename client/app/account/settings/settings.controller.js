@@ -33,7 +33,24 @@ angular.module('badgerApp')
     $scope.isWorker = ($scope.user.accountType === 'Worker');
 
     $scope.updateProfile = function(form) {
-    	console.log('form submitted');
+      if(form.$valid) {
+        var updates = {
+          name: $scope.user.name,
+          location: $scope.user.location,
+          email: $scope.user.email,
+          accountType: $scope.user.accountType,
+          skills: $scope.user.skills,
+          rate: $scope.user.rate,
+          advert: $scope.user.advert
+        };
+    	  Auth.editProfile( updates )
+          .then( function() {
+            $scope.message = 'Profile successfully updated.'
+          })
+          .catch( function() {
+            $scope.message = 'Error updating profile. Please try again later.';
+          });
+      }
     };
 
     $scope.changePassword = function(form) {
