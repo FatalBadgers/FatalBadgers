@@ -1,5 +1,5 @@
 var should = require('should');
-var app = require('../../app');
+var app = require('../../../server');
 var request = require('supertest');
 
 describe('GET /api/mocks', function() {
