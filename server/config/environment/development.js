@@ -10,7 +10,7 @@ module.exports = {
     dialect: 'mysql'
   }),
   seedDB: true,
-  port: 3000
+  port: 9000
 };
 
 
