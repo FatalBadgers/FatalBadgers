@@ -6,7 +6,7 @@ angular.module('badgerApp')
     $scope.errors = {};
 
     $scope.accountOptions = [ 'Client', 'Worker' ];
-    $scope.user.accountType = $scope.accountOptions[1];
+    $scope.user.accountType = $scope.accountOptions[0];
 
     $scope.workerQuestions = [
     	{ field: 'skills', text: 'What are your skills/professions?', example: 'Lumberjack' },
