@@ -6,12 +6,12 @@ angular.module('badgerApp')
     $scope.errors = {};
 
     $scope.accountOptions = [ 'Client', 'Worker' ];
-    $scope.user.accountType = $scope.accountOptions[0];
+    $scope.user.accountType = $scope.accountOptions[1];
 
     $scope.workerQuestions = [
-    	{ field: 'skills', text: 'What are your skills/professions?' },
-    	{ field: 'rate', text: 'What is your hourly rate?' },
-    	{ field: 'advert', text: 'Anything else you would like to say about your work?' }
+    	{ field: 'skills', text: 'What are your skills/professions?', example: 'Lumberjack' },
+    	{ field: 'rate', text: 'What is your hourly rate?', example: '$500 / hr' },
+    	{ field: 'advert', text: 'Anything else you would like to say about your work?', example: 'I sleep all night and I work all day.' }
     ];
 
     $scope.register = function(form) {
@@ -20,6 +20,7 @@ angular.module('badgerApp')
       if(form.$valid) {
       	var newUser = {
           name: $scope.user.name,
+          location: $scope.user.location,
           email: $scope.user.email,
           password: $scope.user.password,
           accountType: $scope.user.accountType
