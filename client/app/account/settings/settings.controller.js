@@ -19,7 +19,7 @@ angular.module('badgerApp')
       password: 'test',
       accountType: 'Worker',
       skills: "I'm a lumberjack.",
-      rate: '$69 / hour',
+      rate: 500,
       advert: "I'm okay. I sleep all night and I work all day."
     };
     // Once user creation is supported, we can test with the following line:
@@ -33,7 +33,7 @@ angular.module('badgerApp')
     $scope.isWorker = ($scope.user.accountType === 'Worker');
 
     $scope.updateProfile = function(form) {
-    	//
+    	console.log('form submitted');
     };
 
     $scope.changePassword = function(form) {
@@ -49,4 +49,5 @@ angular.module('badgerApp')
         });
       }
 		};
+    
   });
