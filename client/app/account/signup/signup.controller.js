@@ -13,7 +13,7 @@ angular.module('badgerApp')
       $scope.submitted = true;
 
       if(form.$valid) {
-      	var newUser = {
+        var newUser = {
           name: $scope.user.name,
           location: $scope.user.location,
           email: $scope.user.email,
@@ -23,9 +23,9 @@ angular.module('badgerApp')
 
         // Add worker data if user is creating a worker account.
         if ($scope.user.accountType === 'Worker') {
-        	newUser.skills = $scope.user.skills;
-        	newUser.rate = $scope.user.rate;
-        	newUser.advert = $scope.user.advert;
+          newUser.skills = $scope.user.skills;
+          newUser.rate = $scope.user.rate;
+          newUser.advert = $scope.user.advert;
         }
 
         Auth.createUser(newUser)
