@@ -1,6 +1,6 @@
 var Sequelize = require("sequelize");
 
-exports = {
+module.exports = {
   ip: process.env.IP || undefined,
   // Create a database connection and export it from this file.
   // Connecting with the user "root", no password,
