@@ -22,5 +22,5 @@ angular.module('badgerApp')
           id:'me'
         }
       }
-	  });
+    });
   });

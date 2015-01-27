@@ -10,7 +10,8 @@
 
   - __Product Owner__: Yan Fan
   - __Scrum Master__: Kevin Primat
-  - __Development Team Members__: Tim Martin, Scott Rice
+  - __Lead Architect__: Tim Martin
+  - __Build Master__: Scott Rice
 
 ## Table of Contents
 
@@ -19,7 +20,6 @@
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
-1. [Team](#team)
 1. [Contributing](#contributing)
 
 ## Usage
@@ -74,7 +74,7 @@ Use grunt test:e2e to have protractor go through tests located in the e2e folder
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/FatalBadgers/FatalBadgers/issues)
 
 
 ## Contributing
