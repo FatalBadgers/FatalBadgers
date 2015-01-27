@@ -47,7 +47,6 @@ angular.module('badgerApp')
       // Returns a {Promise}.
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
-
         return User.save(user,
           function(data) {
             $cookieStore.put('token', data.token);
@@ -64,11 +63,21 @@ angular.module('badgerApp')
       // Returns a {Promise}.
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
-
-        return User.changePassword({ id: currentUser._id }, {
+        return User.editProfile({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
         }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      // Changes a user's profile fields (except password).
+      // Returns a {Promise}.
+      editProfile: function(userObject, callback) {
+        var cb = callback || angular.noop;
+        return User.editProfile(userObject, function(user) {
           return cb(user);
         }, function(err) {
           return cb(err);
