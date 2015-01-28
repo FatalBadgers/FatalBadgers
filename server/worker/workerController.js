@@ -1,4 +1,4 @@
-var models = require('../models/index.js'),
+// var models = require('../models/index.js'),
     Q    = require('q'),
     jwt  = require('jwt-simple');
 
