@@ -28,6 +28,7 @@ module.exports = function(app, express) {
   //     res.sendfile(app.get('appPath') + '/index.html');
   //   });
 
+
 //this should connect to two main routes: worker and client
   app.use('/worker', workerRouter);
   require('./worker/workerRoute.js')(workerRouter);

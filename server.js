@@ -11,20 +11,14 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
-var app = express();
 
-var config = require('./config/environment');
-
+var config = require('./server/config/environment/index');
 // Setup server
 
 var server = require('http').createServer(app);
 
-
-require('./config/express')(app);
-require('./routes')(app, express);
-//require a dummy api js--one file
-
-//routes is where we are telling the site what to do
+require('./server/config/express')(app);
+require('./server/routes')(app);
 
 // Start server
 server.listen(config.port, config.ip, function () {
