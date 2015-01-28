@@ -1,5 +1,7 @@
 'use strict';
 
+var Sequelize = require('sequelize');
+
 module.exports = {
   // Create a database connection and export it from this file.
   // Connecting with the user "root", no password,
