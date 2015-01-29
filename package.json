@@ -18,7 +18,8 @@
     "q": "^1.1.2",
     "serve-favicon": "~2.0.1",
     "sequelize": "*",
-    "mysql": "*"
+    "mysql": "*",
+    "aws-sdk": "~2.0.0-rc11"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

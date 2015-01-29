@@ -9,6 +9,11 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
 var config = require('./server/config/environment/index');
+
+// Initialize AWS
+var AWS = require('aws-sdk');
+AWS.config.loadFromPath('./server/aws/aws.json');
+
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
