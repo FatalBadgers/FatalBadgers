@@ -7,7 +7,8 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
   password: Sequelize.STRING,
   location: Sequelize.STRING,
   email: Sequelize.STRING,
-  'avg_rating': Sequelize.STRING
+  'avg_rating': Sequelize.STRING,
+  'img_url': Sequelize.STRING
 });
 
 // define the clients database
@@ -16,7 +17,8 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
   password: Sequelize.STRING,
   location: Sequelize.STRING,
   email: Sequelize.STRING,
-  'avg_rating': Sequelize.STRING
+  'avg_rating': Sequelize.STRING,
+  'img_url': Sequelize.STRING
 });
 
 // define the client_review database
@@ -42,7 +44,8 @@ exports.Jobs = exports.ihammerDatabase.define("jobs", {
   budget: Sequelize.INTEGER,
   summary: Sequelize.STRING,
   'skills_needed': Sequelize.STRING,
-  status: Sequelize.STRING
+  status: Sequelize.STRING,
+  'img_url': Sequelize.STRING
 });
 
 // create all associations between databases specified above
