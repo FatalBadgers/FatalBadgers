@@ -1,8 +1,7 @@
-// This file sets up the config so that we can load images into AWS S3
+// This file sets up the process.ENV so that we can load images into AWS S3
 
 var AWS = require('aws-sdk'),
   crypto = require('crypto'),
-  config = require('./aws.json'),
   createS3Policy,
   getExpiryTime;
 
@@ -18,7 +17,7 @@ createS3Policy = function(contentType, callback) {
     'expiration': getExpiryTime(),
     'conditions': [
       ['starts-with', '$key', 'ihammer/'],
-      {'bucket': config.bucket},
+      {'bucket': process.ENV.BUCKET},
       {'acl': 'public-read'},
       ['starts-with', '$Content-Type', contentType],
       {'success_action_status': '201'}
@@ -30,14 +29,14 @@ createS3Policy = function(contentType, callback) {
   var base64Policy = new Buffer(stringPolicy, 'utf-8').toString('base64');
 
   // sign the base64 encoded policy
-  var signature = crypto.createHmac('sha1', config.secretAccessKey)
+  var signature = crypto.createHmac('sha1', process.ENV.SECRET_ACCESS_KEY)
     .update(new Buffer(base64Policy, 'utf-8')).digest('base64');
 
   // build the results object
   var s3Credentials = {
     s3Policy: base64Policy,
     s3Signature: signature,
-    AWSAccessKeyId: config.accessKeyId
+    AWSAccessKeyId: process.ENV.ACCESS_KEY_ID
   };
 
   // send it back
