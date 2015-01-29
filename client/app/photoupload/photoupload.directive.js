@@ -3,7 +3,8 @@
 // 2. A photo upload widget will appear in place of the <photoupload> html tag, with html generated from photoupload.html
 // 3. The logic for the photoupload directive is contained in the controller below
 //
-// This code is largely borrowed from https://github.com/nukulb/s3-angular-file-upload
+// This code is largely borrowed from https://github.com/nukulb/s3-angular-file-upload and https://github.com/danialfarid/angular-file-upload,
+// so look at those repos for specifics about the below directive.
 
 
 angular.module('badgerApp')
