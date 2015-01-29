@@ -7,16 +7,18 @@
       <div class="text-left">
       <label>
         <dl class="lead dl-horizontal">
-          <dt>Location</dt>
-          <dd>{{viewee.location}}</dd>
           <dt>Skills</dt>
           <dd>{{viewee.skills}}</dd>
+          <dt>Statement</dt>
+          <dd>{{viewee.advert}}</dd>
           <dt>Hourly Rate</dt>
           <dd>${{viewee.rate}}</dd>
           <dt>User Rating</dt>
           <dd>{{viewee.rating}}</dd>
-          <dt>Other</dt>
-          <dd>{{viewee.advert}}</dd>
+          <dt>Location</dt>
+          <dd>{{viewee.location}}</dd>
+          <dt>Contact</dt>
+          <dd><a href='#' style="color:white">{{viewee.email}}</a></dd>
         </dl>
       </label>
     </div>
@@ -26,13 +28,20 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
+
       <h2>iHammer Project History</h2>
-      <div ng-repeat="project in viewee.history">
-        <h3>{{project.title}}</h3>
-        <p>{{project.summary}}</p>
-        <span>{{project.stars}}</span>
-        <p>{{project.review}}</p>
-      </div>
+      <table class="table table-striped">
+        <tr ng-repeat="project in viewee.history">
+          <td>
+            <h4>{{project.title}}</h4>
+            <p>{{project.summary}}</p>
+            <span>{{project.stars}}</span>
+            <em>by: {{project.client}}</em>
+            <p>{{project.review}}</p>
+          </td>
+        </tr>
+      </table>
+
     </div>
   </div>
 </div>
