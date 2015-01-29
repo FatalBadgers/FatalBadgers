@@ -1,3 +1,38 @@
-<div class="col-md-12">
-This is the profile view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1 class="text-left" style="margin-top:0px">{{viewee.name}}</h1>
+    <img src="{{viewee.profilePic}}" class="profile-pic img-rounded pull-left">
+      <div class="text-left">
+      <label>
+        <dl class="lead dl-horizontal">
+          <dt>Location</dt>
+          <dd>{{viewee.location}}</dd>
+          <dt>Skills</dt>
+          <dd>{{viewee.skills}}</dd>
+          <dt>Hourly Rate</dt>
+          <dd>${{viewee.rate}}</dd>
+          <dt>User Rating</dt>
+          <dd>{{viewee.rating}}</dd>
+          <dt>Other</dt>
+          <dd>{{viewee.advert}}</dd>
+        </dl>
+      </label>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>iHammer Project History</h2>
+      <div ng-repeat="project in viewee.history">
+        <h3>{{project.title}}</h3>
+        <p>{{project.summary}}</p>
+        <span>{{project.stars}}</span>
+        <p>{{project.review}}</p>
+      </div>
+    </div>
+  </div>
 </div>
