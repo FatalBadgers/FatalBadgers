@@ -4,11 +4,11 @@ var AWS = require('aws-sdk'),
   crypto = require('crypto'),
   createS3Policy,
   getExpiryTime,
-  config;
+  config = {};
 
 //handle error if aws.json does not exist
 try {
-  config = require('./aws/aws.json')
+  config = require('./aws.json')
 }
 catch(e) {
   console.log('aws.json not found');
@@ -26,7 +26,7 @@ createS3Policy = function(contentType, callback) {
     'expiration': getExpiryTime(),
     'conditions': [
       ['starts-with', '$key', 'ihammer/'],
-      {'bucket': process.ENV.BUCKET || config.bucket},
+      {'bucket': config.bucket || process.env.BUCKET },
       {'acl': 'public-read'},
       ['starts-with', '$Content-Type', contentType],
       {'success_action_status': '201'}
@@ -38,14 +38,14 @@ createS3Policy = function(contentType, callback) {
   var base64Policy = new Buffer(stringPolicy, 'utf-8').toString('base64');
 
   // sign the base64 encoded policy
-  var signature = crypto.createHmac('sha1', process.ENV.SECRET_ACCESS_KEY || config.secretAccessKey)
+  var signature = crypto.createHmac('sha1', config.secretAccessKey || process.env.SECRET_ACCESS_KEY )
     .update(new Buffer(base64Policy, 'utf-8')).digest('base64');
 
   // build the results object
   var s3Credentials = {
     s3Policy: base64Policy,
     s3Signature: signature,
-    AWSAccessKeyId: process.ENV.ACCESS_KEY_ID || config.accessKeyId
+    AWSAccessKeyId:  config.accessKeyId || process.env.ACCESS_KEY_ID
   };
 
   // send it back

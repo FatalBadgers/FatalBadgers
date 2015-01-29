@@ -9,7 +9,7 @@
         </div>
       </div>
       <div ng-repeat="image in imageUploads" class="img-upload">
-        <img ng-src="{{image.location}}">
+        <img ng-src="{{image.location}}" class="profile-pic img-rounded">
       </div>
       <button class="btn btn-ttc" type="button" ng-click="abort($index)" ng-show="file.progress != 100">Abort</button>
     </div>
