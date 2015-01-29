@@ -1,3 +1,52 @@
-<div class="col-md-12">
-This is the profile view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1 class="text-left" style="margin-top:0px">{{viewee.name}}</h1>
+    <img src="{{viewee.profilePic}}" class="profile-pic img-rounded pull-left">
+      <div class="text-left">
+      <label>
+        <dl class="lead dl-horizontal">
+
+          <div ng-if="isWorker">
+            <dt>Skills</dt>
+            <dd>{{viewee.skills}}</dd>
+            <dt>Statement</dt>
+            <dd>{{viewee.advert}}</dd>
+            <dt>Hourly Rate</dt>
+            <dd>${{viewee.rate}}</dd>
+          </div>
+
+          <dt>Location</dt>
+          <dd>{{viewee.location}}</dd>
+          <dt>Contact</dt>
+          <dd>{{viewee.email}}</dd>
+          <dt>User Rating</dt>
+          <dd>{{viewee.rating}}</dd>
+        </dl>
+      </label>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <h1>{{viewee.name}}'s Project History</h1>
+      
+      <table class="table table-striped">
+        <tr ng-repeat="project in viewee.history">
+          <td>
+            <h4>{{project.title}}</h4>
+            <p>{{project.summary}}</p>
+            <span>{{project.stars}}</span>
+            <em ng-if="isWorker">by: {{project.client}}</em>
+            <em ng-if="!isWorker">by: {{project.worker}}</em>
+            <p>{{project.review}}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

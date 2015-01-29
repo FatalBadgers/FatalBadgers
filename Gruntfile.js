@@ -35,17 +35,17 @@ module.exports = function (grunt) {
     },
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port: 9000
       },
       dev: {
         options: {
-          script: 'server/app.js',
+          script: 'server.js',
           debug: true
         }
       },
       prod: {
         options: {
-          script: 'dist/server/app.js'
+          script: 'dist/server.js'
         }
       }
     },
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.js',
           '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '!<%= yeoman.client %>/{app,components}/**/*.mock.js',
-          '!<%= yeoman.client %>/app/app.js'],
+          '!<%= yeoman.client %>/server.js'],
         tasks: ['injector:scripts']
       },
       injectCss: {
@@ -186,11 +186,11 @@ module.exports = function (grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: 'server/app.js',
+        script: 'server.js',
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
-            PORT: process.env.PORT || 9000
+            PORT: 9000
           },
           callback: function (nodemon) {
             nodemon.on('log', function (event) {
@@ -310,7 +310,7 @@ module.exports = function (grunt) {
           removeScriptTypeAttributes: true,
           removeStyleLinkTypeAttributes: true
         },
-        usemin: 'app/app.js'
+        usemin: 'server.js'
       },
       main: {
         cwd: '<%= yeoman.client %>',

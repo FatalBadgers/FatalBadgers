@@ -1,14 +1,15 @@
 var Sequelize = require("sequelize");
 
 module.exports = {
+  ip: process.env.IP || undefined,
   // Create a database connection and export it from this file.
   // Connecting with the user "root", no password,
   // and to the database "ihammer".
-  mysql: new Sequelize('ihammer', 'root', '', {
-    host: 'localhost',
+  mysql: new Sequelize('ihammer', 'FatalBadgers', 'FatalBadgers', {
+    host: process.env.DATABASE_HOST,
     port: '3306',
     dialect: 'mysql'
   }),
   seedDB: true,
-  port: 9000
+  port: 80
 };

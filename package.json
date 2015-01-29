@@ -6,7 +6,6 @@
     "body-parser": "~1.5.0",
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
-    "connect-mongo": "^0.4.1",
     "cookie-parser": "~1.0.1",
     "ejs": "~0.8.4",
     "errorhandler": "~1.0.0",
@@ -19,7 +18,8 @@
     "q": "^1.1.2",
     "serve-favicon": "~2.0.1",
     "sequelize": "*",
-    "mysql": "*"
+    "mysql": "*",
+    "aws-sdk": "~2.0.0-rc11"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
