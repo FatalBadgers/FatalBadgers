@@ -7,18 +7,20 @@
       <div class="text-left">
       <label>
         <dl class="lead dl-horizontal">
-          <dt>Skills</dt>
-          <dd>{{viewee.skills}}</dd>
-          <dt>Statement</dt>
-          <dd>{{viewee.advert}}</dd>
-          <dt>Hourly Rate</dt>
-          <dd>${{viewee.rate}}</dd>
-          <dt>User Rating</dt>
-          <dd>{{viewee.rating}}</dd>
+          <div ng-if="isWorker">
+            <dt>Skills</dt>
+            <dd>{{viewee.skills}}</dd>
+            <dt>Statement</dt>
+            <dd>{{viewee.advert}}</dd>
+            <dt>Hourly Rate</dt>
+            <dd>${{viewee.rate}}</dd>
+          </div>
           <dt>Location</dt>
           <dd>{{viewee.location}}</dd>
           <dt>Contact</dt>
-          <dd><a href='#' style="color:white">{{viewee.email}}</a></dd>
+          <dd>{{viewee.email}}</dd>
+          <dt>User Rating</dt>
+          <dd>{{viewee.rating}}</dd>
         </dl>
       </label>
     </div>
@@ -28,20 +30,19 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-
-      <h2>iHammer Project History</h2>
+      <h1>{{viewee.name}}'s Project History</h1>
       <table class="table table-striped">
         <tr ng-repeat="project in viewee.history">
           <td>
             <h4>{{project.title}}</h4>
             <p>{{project.summary}}</p>
             <span>{{project.stars}}</span>
-            <em>by: {{project.client}}</em>
+            <em ng-if="isWorker">by: {{project.client}}</em>
+            <em ng-if="!isWorker">by: {{project.client}}</em>
             <p>{{project.review}}</p>
           </td>
         </tr>
       </table>
-
     </div>
   </div>
 </div>
