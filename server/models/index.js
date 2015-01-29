@@ -6,7 +6,7 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
   name: Sequelize.STRING,
   location: Sequelize.STRING,
   email: Sequelize.STRING,
-  'avg_rating': Sequelize.STRING
+  'avg_rating': Sequelize.STRING,
 });
 
 // define the clients database
