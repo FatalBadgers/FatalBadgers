@@ -1,6 +1,7 @@
 //handle error if aws.json does not exist
+var config = {};
 try {
-  config = require('./aws/aws.json')
+  config = require('./aws.json')
 }
 catch(e) {
   console.log('aws.json not found');
@@ -9,7 +10,7 @@ catch(e) {
 exports.getClientConfig = function(req, res, next) {
   return res.json(200, {
     awsConfig: {
-      bucket: process.env.BUCKET || config.bucket
+      bucket:  config.bucket || process.env.BUCKET
     }
   });
 };
