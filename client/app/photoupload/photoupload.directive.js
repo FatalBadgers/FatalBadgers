@@ -14,7 +14,7 @@ angular.module('badgerApp')
       restrict: 'EA',
       link: function(scope, element, attrs) {
       },
-      controller: function($scope, $http, $location, $upload, $rootScope) {
+      controller: function($scope, $http, $upload, $rootScope) {
         $scope.imageUploads = [];
         $scope.abort = function(index) {
           $scope.upload[index].abort();

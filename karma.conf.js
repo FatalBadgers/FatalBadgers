@@ -39,7 +39,10 @@ module.exports = function(config) {
     },
 
     ngHtml2JsPreprocessor: {
-      stripPrefix: 'client/'
+      stripPrefix: 'client/',
+
+      // the name of the Angular module to create
+      moduleName: "ihammer.templates"
     },
 
     ngJade2JsPreprocessor: {
