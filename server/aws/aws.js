@@ -1,4 +1,4 @@
-'use strict';
+// This file sets up the config so that we can load images into AWS S3
 
 var AWS = require('aws-sdk'),
   crypto = require('crypto'),

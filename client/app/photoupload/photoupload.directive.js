@@ -1,3 +1,11 @@
+// Usage:
+// 1. Put <photoupload></photoupload> in any html file
+// 2. A photo upload widget will appear in place of the <photoupload> html tag, with html generated from photoupload.html
+// 3. The logic for the photoupload directive is contained in the controller below
+//
+// This code is largely borrowed from https://github.com/nukulb/s3-angular-file-upload
+
+
 angular.module('badgerApp')
   .directive('photoupload', function() {
     return {
