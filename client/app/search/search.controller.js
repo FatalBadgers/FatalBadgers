@@ -1,7 +1,7 @@
 angular.module('badgerApp')
   .controller('SearchCtrl', function($scope, $http, $location) {
     //determine whether on worker or contract search screen
-    $location.path() === '/worker/search' ? $scope.isWorkerSearch = true :  $scope.isWorkerSearch = false;
+    $location.path() === '/worker/search' ? $scope.isWorkerSearch = true : $scope.isWorkerSearch = false;
 
     $scope.entry = {};
     $scope.clear = function() {
@@ -10,8 +10,8 @@ angular.module('badgerApp')
 
     $scope.refreshTypeahead = function(entry) {
       return $http.get('/api/workers?q=' + entry).then(function(response) {
-          $scope.entries = response.data.results
-        });
+        $scope.entries = response.data.results
+      });
     };
 
     $scope.doSearch = function(item, model) {
