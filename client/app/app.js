@@ -6,7 +6,8 @@ angular.module('badgerApp', [
   'ngSanitize',
   'ui.router',
   'angularFileUpload',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ui.select'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider

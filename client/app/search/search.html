@@ -1,3 +1,63 @@
-<div class="col-md-12">
-This is the search view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<h1 ng-if="isWorkerSearch">Worker Search</h1>
+<h1 ng-if="!isWorkerSearch">Contract Search</h1>
+
+<ui-select ng-model="entry.selected"
+           theme="bootstrap"
+           reset-search-input="false"
+           style="width: 300px;"
+           on-select="doSearch($item, $model)">
+  <ui-select-match placeholder="Search...">{{$select.selected.name}}</ui-select-match>
+  <ui-select-choices repeat="entry in entries track by $index"
+                     refresh="refreshTypeahead($select.search)"
+                     refresh-delay="0">
+    <div ng-bind-html="entry.name | highlight: $select.search"></div>
+  </ui-select-choices>
+</ui-select>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table table-striped">
+        <tr ng-repeat="result in searchResults">
+          <td>
+            <img src="{{result.img_url}}" class="img-rounded pull-left">
+
+            <div class="text-left">
+              <label>
+                <dl class="lead dl-horizontal">
+
+                  <div ng-if="isWorkerSearch">
+                    <dt>Name</dt>
+                    <dd>{{result.name}}</dd>
+                    <dt>Location</dt>
+                    <dd>{{result.location}}</dd>
+                    <dt>Skills & Services</dt>
+                    <dd>{{result.description}}</dd>
+                    <dt>Hourly Rate</dt>
+                    <dd>${{result.hourly_rate}}</dd>
+                  </div>
+
+                  <div ng-if="!isWorkerSearch">
+                    <dt>Hourly Rate</dt>
+                    <dd>${{result.hourly_rate}}</dd>
+                    <dt>Client Name</dt>
+                    <dd>{{result.name}}</dd>
+                    <dt>Location</dt>
+                    <dd>{{result.location}}</dd>
+                    <dt>Summary</dt>
+                    <dd>{{result.summary}}</dd>
+                    <dt>Skills Needed</dt>
+                    <dd>{{result.skills_needed}}</dd>
+                  </div>
+                </dl>
+              </label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
+

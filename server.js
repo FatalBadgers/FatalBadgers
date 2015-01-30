@@ -13,6 +13,7 @@ var config = require('./server/config/environment/index');
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
+
 require('./server/config/express')(app);
 require('./server/routes')(app);
 
