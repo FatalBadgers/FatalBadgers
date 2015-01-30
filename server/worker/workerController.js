@@ -2,7 +2,7 @@
 //http://architects.dzone.com/articles/sequelize-javascript-orm
 
 var Q = require('q'),
-    jwt  = require('jwt-simple');
+  jwt = require('jwt-simple');
 var express = require('express');
 var app = express();
 var db = require('../models/index.js');
@@ -18,6 +18,7 @@ var WorkerJobs = db.WorkersJobs;
 var ClientReviews = db.ClientReviews;
 
 module.exports = {
+
   signin: function (req, res, next) {
     res.end('you are in signin');
     //kevin 
@@ -113,5 +114,6 @@ module.exports = {
   dashboard: function(req, res, next) {
     res.send()
   }
+
 
 };

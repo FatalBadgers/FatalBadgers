@@ -23,3 +23,5 @@ module.exports = function(app){
   })
   
 }
+  //TODO: Add any worker specific routes.
+};
