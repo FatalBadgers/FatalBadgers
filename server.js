@@ -2,9 +2,6 @@
  * Main application file
  */
 
-//YF: 
-//I think we need to connect to server as well as MySQL here
-
 'use strict';
 
 // Set default node environment to development
@@ -15,7 +12,7 @@ var express = require('express');
 var config = require('./server/config/environment/index');
 
 // Setup server
-
+var app = express();
 var server = require('http').createServer(app);
 
 require('./server/config/express')(app);

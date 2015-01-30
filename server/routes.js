@@ -9,15 +9,14 @@ var express = require('express');
 var api = require('./aws/api');
 var aws = require('./aws/aws');
 
-
-module.exports = function(app, express) {
-//this brings user to homepage
+module.exports = function(app) {
   app.route('/')
-    .get(function(req, res) {
+    .get(function(req, res){
       res.sendfile(app.get('appPath') + '/index.html');
     });
 
-  var workerRouter = express.Router();
+  // Insert routes below
+  app.use('/api/mocks', require('./api/mocks'));
 
   var userRouter = express.Router();
   app.use('/api/user', userRouter);
