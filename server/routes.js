@@ -18,6 +18,18 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/mocks', require('./api/mocks'));
 
+  var userRouter = express.Router();
+  app.use('/api/user', userRouter);
+  require('./user/userRoute.js')(userRouter);
+
+  var contractRouter = express.Router();
+  app.use('/api/contract', contractRouter);
+  require('./worker/workerRoute.js')(contractRouter);
+
+  var workerRouter = express.Router();
+  app.use('/api/worker', workerRouter);
+  require('./worker/workerRoute.js')(workerRouter);
+
   // aws config and s3 setup
   app.get('/api/config', api.getClientConfig);
   app.get('/api/s3Policy', aws.getS3Policy);
@@ -32,8 +44,4 @@ module.exports = function(app) {
     .get(function(req, res) {
       res.sendfile(app.get('appPath') + '/index.html');
     });
-
-  var workerRouter = express.Router();
-  app.use('/worker', workerRouter);
-  require('./worker/workerRoute.js')(workerRouter);
 };
