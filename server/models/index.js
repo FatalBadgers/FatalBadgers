@@ -1,4 +1,7 @@
-var Sequelize = require("sequelize");
+var Sequelize = require("sequelize"),
+  bcrypt = require('bcrypt-nodejs'),
+  Q = require('q');
+
 exports.ihammerDatabase = require('../config/environment').mysql;
 
 // define the workers database
@@ -7,7 +10,44 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
   password: Sequelize.STRING,
   location: Sequelize.STRING,
   email: Sequelize.STRING,
-  'avg_rating': Sequelize.STRING
+  skills: Sequelize.TEXT,
+  'hourly_rate': Sequelize.BIGINT,
+  'avg_rating': Sequelize.STRING,
+  'img_url': Sequelize.STRING,
+  summary: Sequelize.TEXT,
+  'account_type': {
+    type: Sequelize.STRING,
+    defaultValue: 'worker'
+  }
+}, {
+  instanceMethods: {
+    comparePasswords: function(candidatePassword) {
+      var defer = Q.defer();
+      var savedPassword = this.password;
+      bcrypt.compare(candidatePassword, savedPassword, function(err, isMatch) {
+        if(err) {
+          defer.reject(err);
+        } else {
+          defer.resolve(isMatch);
+        }
+      });
+      return defer.promise;
+    }
+  }, classMethods: {
+    setPassword: function(password) {
+      var defer = Q.defer();
+      bcrypt.genSalt(10, function(err, salt) {
+        return bcrypt.hash(password, salt, null, function(err, encrypted) {
+          if(err) {
+            defer.reject(err);
+          } else {
+            defer.resolve(encrypted);
+          }
+        });
+      });
+      return defer.promise;
+    }
+  }
 });
 
 // define the clients database
@@ -16,7 +56,42 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
   password: Sequelize.STRING,
   location: Sequelize.STRING,
   email: Sequelize.STRING,
-  'avg_rating': Sequelize.STRING
+  'avg_rating': Sequelize.STRING,
+  'img_url': Sequelize.STRING,
+  summary: Sequelize.TEXT,
+  'account_type': {
+    type: Sequelize.STRING,
+    defaultValue: 'client'
+  }
+}, {
+  instanceMethods: {
+    comparePasswords: function(candidatePassword) {
+      var defer = Q.defer();
+      var savedPassword = this.password;
+      bcrypt.compare(candidatePassword, savedPassword, function(err, isMatch) {
+        if(err) {
+          defer.reject(err);
+        } else {
+          defer.resolve(isMatch);
+        }
+      });
+      return defer.promise;
+    }
+  }, classMethods: {
+    setPassword: function(password) {
+      var defer = Q.defer();
+      bcrypt.genSalt(10, function(err, salt) {
+        return bcrypt.hash(password, salt, null, function(err, encrypted) {
+          if(err) {
+            defer.reject(err);
+          } else {
+            defer.resolve(encrypted);
+          }
+        });
+      });
+      return defer.promise;
+    }
+  }
 });
 
 // define the client_review database
@@ -32,21 +107,21 @@ exports.WorkerReviews = exports.ihammerDatabase.define("worker_reviews", {
 });
 
 // define the workers_jobs database
-exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {
-});
+exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {});
 
 // define the jobs database
 exports.Jobs = exports.ihammerDatabase.define("jobs", {
   title: Sequelize.STRING,
   applicants: Sequelize.INTEGER,
-  budget: Sequelize.INTEGER,
-  summary: Sequelize.STRING,
-  'skills_needed': Sequelize.STRING,
-  status: Sequelize.STRING
+  'hourly_rate': Sequelize.INTEGER,
+  summary: Sequelize.TEXT,
+  'skills_needed': Sequelize.TEXT,
+  status: Sequelize.STRING,
+  'img_url': Sequelize.STRING
 });
 
 // create all associations between databases specified above
-exports.Workers.sync().complete(function(err) {
+exports.Workers.sync({force: true}).complete(function(err) {
   if(err) {
     console.log('Error creating Workers:', err)
   } else {
@@ -54,7 +129,7 @@ exports.Workers.sync().complete(function(err) {
   }
 });
 
-exports.Clients.sync().complete(function(err) {
+exports.Clients.sync({force: true}).complete(function(err) {
   if(err) {
     console.log('Error creating Clients:', err)
   } else {
@@ -62,7 +137,7 @@ exports.Clients.sync().complete(function(err) {
   }
 });
 
-exports.WorkerReviews.sync().complete(function(err) {
+exports.WorkerReviews.sync({force: true}).complete(function(err) {
   if(err) {
     console.log('Error creating Worker Reviews:', err)
   } else {
@@ -70,7 +145,7 @@ exports.WorkerReviews.sync().complete(function(err) {
   }
 });
 
-exports.ClientReviews.sync().complete(function(err) {
+exports.ClientReviews.sync({force: true}).complete(function(err) {
   if(err) {
     console.log('Error creating Client Reviews:', err)
   } else {
@@ -78,7 +153,7 @@ exports.ClientReviews.sync().complete(function(err) {
   }
 });
 
-exports.WorkersJobs.sync().complete(function(err) {
+exports.WorkersJobs.sync({force: true}).complete(function(err) {
   if(err) {
     console.log('Error creating Workers Jobs:', err)
   } else {
@@ -86,7 +161,7 @@ exports.WorkersJobs.sync().complete(function(err) {
   }
 });
 
-exports.Jobs.sync().complete(function(err) {
+exports.Jobs.sync({force: true}).complete(function(err) {
   if(err) {
     console.log('Error creating Jobs:', err)
   } else {
@@ -103,12 +178,12 @@ exports.Clients.hasMany(exports.ClientReviews);
 exports.ClientReviews.belongsTo(exports.Clients);
 
 //One to one relationship from jobs to clients
-exports.Jobs.hasOne(exports.Clients);
-exports.Clients.belongsTo(exports.Jobs);
+exports.Clients.hasMany(exports.Jobs);
+exports.Jobs.belongsTo(exports.Clients);
 
 //Many to many relationship from workers to jobs
-exports.Workers.hasMany(exports.Jobs, { through: "workers_jobs" });
-exports.Jobs.belongsToMany(exports.Workers, { through: "workers_jobs" });
+exports.Workers.hasMany(exports.Jobs, {through: "workers_jobs"});
+exports.Jobs.belongsToMany(exports.Workers, {through: "workers_jobs"});
 
 exports.ihammerDatabase
   .authenticate()

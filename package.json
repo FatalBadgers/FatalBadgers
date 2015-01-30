@@ -19,6 +19,11 @@
     "q": "^1.1.2",
     "sequelize": "^2.0.0-rc8",
     "serve-favicon": "~2.0.1"
+    "mysql": "*",
+    "aws-sdk": "~2.0.0-rc11",
+    "cookie-parser": "^1.3.3",
+    "cookie-session": "^1.1.0",
+    "bcrypt-nodejs": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
