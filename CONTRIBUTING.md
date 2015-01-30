@@ -2,17 +2,18 @@
 
 ## General Workflow
 
-1. Fork the dev branch of the repo
-1. Make commits to your feature branch. Prefix each commit with the issue number in parenthesis:
-  - (#1) Added a new feature
-1. When you've finished with your fix or feature, merge upstream changes into your branch. submit a [pull request][]
-   directly to dev. Include a description of your changes.
-1. Your pull request will be reviewed by another maintainer. The point of code
-   reviews is to help keep the codebase clean and of high quality and, equally
-   as important, to help you grow as a programmer. If your code reviewer
-   requests you make a change you don't understand, ask them why.
-1. Fix any issues raised by your code reviewer, and push your fixes as a single
-   new commit.
+1. Fork the dev branch of the FatalBadger repository.
+1. From your personal fork, create a new branch for the specific issue that you are working on
+1. Make commits to your feature branch. If the issue you are working on is logged in our Issues, prefix each commit with the issue number in parenthesis:
+  - "(#1) Fixed [some-issue] with [some feature]."
+1. When you're ready to make a pull request with your new feature or fix, please ensure the following before submitting:
+  - If you are adding a new feature, make sure to have meaningful tests in the feature.spec.js file.
+  - Run 'grunt test' from the command line and make sure all tests are passing.
+  - Follow the style guide, located here: [STYLE-GUIDE.md](STYLE-GUIDE.md).
+  - Include a relevant and meaninful description of your changes, include screen shots if appropriate.
+  - Submit a [pull request][] to the dev branch of FatalBadgers.
+1. Your pull request will be reviewed by another admin or owner to determine if the request can be merged in. The point of code reviews is to help keep the codebase clean and of high quality and, equally as important, to help you grow as a programmer. If your code reviewer requests you make a change you don't understand, ask them why.
+1. Fix any issues raised by your code reviewer and push your fixes/changes to the appropriate branch on your personal fork.
 1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
 
 ## Detailed Workflow
@@ -22,7 +23,7 @@
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/FatalBadgers/<NAME_OF_REPO>.git
+git remote add upstream https://github.com/FatalBadgers/FatalBadgers.git
 ```
 
 ### Checkout the dev branch, if not there already
