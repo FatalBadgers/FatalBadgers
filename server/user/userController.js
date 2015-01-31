@@ -27,10 +27,7 @@ module.exports = {
               return worker.comparePasswords(password)
                 .then(function(foundWorker) {
                   if(foundWorker) {
-                    var token = jwt.encode(worker, 'secret');
-                    res.json({
-                      token: token
-                    });
+                    res.send(worker);
                   } else {
                     return next(new Error('No worker'));
                   }
@@ -50,10 +47,7 @@ module.exports = {
               return client.comparePasswords(password)
                 .then(function(foundClient) {
                   if(foundClient) {
-                    var token = jwt.encode(client, 'secret');
-                    res.json({
-                      token: token
-                    });
+                    res.send(client);
                   } else {
                     return next(new Error('No client'));
                   }
@@ -108,10 +102,7 @@ module.exports = {
                     console.log(err)
                   } else {
                     console.log("auth token created");
-                    var token = jwt.encode(worker, 'secret');
-                    res.json({
-                      token: token
-                    });
+                    res.json(worker);
                   }
                 });
               });
@@ -148,57 +139,13 @@ module.exports = {
                     console.log(err)
                   } else {
                     console.log("auth token created");
-                    var token = jwt.encode(client, 'secret');
-                    res.json({
-                      token: token
-                    });
+                    res.json(client);
                   }
                 });
               });
             }
           }
         })
-    }
-  },
-
-  checkAuth: function(req, res, next) {
-    // checking to see if the user is authenticated
-    // grab the token in the header is any
-    // then decode the token, which we end up being the user object
-    // check to see if that user exists in the database
-    var token = req.headers['x-access-token'];
-    if(!token) {
-      next(new Error('No token'));
-    } else {
-      if(token.account_type === "worker") {
-        var worker = jwt.decode(token, 'secret');
-        var findWorker = Q.nbind(User.findOne, User);
-        findWorker({where: {email: worker.email}})
-          .then(function(foundWorker) {
-            if(foundWorker) {
-              res.send(200);
-            } else {
-              res.send(401);
-            }
-          })
-          .fail(function(error) {
-            next(error);
-          });
-      } else {
-        var client = jwt.decode(token, 'secret');
-        var findClient = Q.nbind(User.findOne, User);
-        findClient({where: {email: client.email}})
-          .then(function(findClient) {
-            if(findClient) {
-              res.send(200);
-            } else {
-              res.send(401);
-            }
-          })
-          .fail(function(error) {
-            next(error);
-          });
-      }
     }
   },
 

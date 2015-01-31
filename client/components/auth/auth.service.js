@@ -3,14 +3,10 @@
 angular.module('badgerApp')
   // Set currentUser to an empty object and then they check if there is a cookie named (?) 'token'.
   // If it is then they call the User service method get, this should return a currentUser object.
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore) {
     var currentUser = {};
     if($cookieStore.get('token')) {
-      console.log("cookie:", $cookieStore.get('token'));
-      currentUser = User.getuser({
-        email: $cookieStore.get('token').email,
-        accountType: $cookieStore.get('token').accountType
-      });
+      currentUser = $cookieStore.get('token');
     }
 
     return {
@@ -20,7 +16,7 @@ angular.module('badgerApp')
         var cb = callback || angular.noop;
         return User.login(user, function(data) {
           $cookieStore.put('token', data);
-          currentUser = user;
+          currentUser = data;
           return cb(user);
         }, function(err) {
           this.logout();
@@ -71,6 +67,14 @@ angular.module('badgerApp')
         }, function(err) {
           return cb(err);
         }).$promise;
+      },
+
+      isAuth: function() {
+        return !!$cookieStore.get('token');
+      },
+
+      getCurrentUser: function(){
+        return currentUser;
       }
-    };
+    }
   });
