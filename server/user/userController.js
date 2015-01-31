@@ -226,7 +226,7 @@ module.exports = {
     }
   },
 
-  gethistory: function(req, res, next) {
+  getHistory: function(req, res, next) {
     
     var accountType = req.body.accountType;
 
@@ -247,7 +247,7 @@ module.exports = {
     }
   },
 
-  endcontract: function(req, res, next) {
+  endContract: function(req, res, next) {
     
     var id = req.body.id
 
