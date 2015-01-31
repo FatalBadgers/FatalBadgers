@@ -6,7 +6,11 @@ angular.module('badgerApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
-      currentUser = User.get();
+      console.log("cookie:", $cookieStore.get('token'));
+      currentUser = User.getuser({
+        email: $cookieStore.get('token').email,
+        accountType: $cookieStore.get('token').accountType
+      });
     }
 
     return {
@@ -14,22 +18,14 @@ angular.module('badgerApp')
       // Returns a {Promise}.
       login: function(user, callback) {
         var cb = callback || angular.noop;
-        var deferred = $q.defer();
-
-        User.login(user).
-          success(function(data) {
-            $cookieStore.put('token', data.token);
-            currentUser = User.get();
-            deferred.resolve(data);
-            return cb();
-          }).
-          error(function(err) {
-            this.logout();
-            deferred.reject(err);
-            return cb(err);
-          }.bind(this));
-
-        return deferred.promise;
+        return User.login(user, function(data) {
+          $cookieStore.put('token', data);
+          currentUser = user;
+          return cb(user);
+        }, function(err) {
+          this.logout();
+          return cb(err);
+        }.bind(this)).$promise;
       },
 
       // Delete access token and user info.
@@ -43,7 +39,7 @@ angular.module('badgerApp')
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
         return User.signup(user, function(data) {
-          $cookieStore.put('token', data.token);
+          $cookieStore.put('token', data);
           currentUser = data;
           return cb(user);
         }, function(err) {

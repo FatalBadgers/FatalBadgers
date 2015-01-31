@@ -16,50 +16,50 @@ module.exports = {
       accountType = req.body.accountType;
 
     if(accountType === 'Worker') {
-      var findWorker = Q.nbind(Worker.find, Worker);
-      findWorker({where: {email: email}})
-        .then(function(worker) {
-          if(!worker) {
-            next(new Error('Worker does not exist'));
+      Worker.find({where: {email: email}})
+        .complete(function(err, worker) {
+          if(err) {
+            console.log(err)
           } else {
-            return worker.comparePasswords(password)
-              .then(function(foundWorker) {
-                if(foundWorker) {
-                  var token = jwt.encode(worker, 'secret');
-                  res.json({
-                    token: token
-                  });
-                } else {
-                  return next(new Error('No worker'));
-                }
-              });
+            if(!worker) {
+              next(new Error('Worker does not exist'));
+            } else {
+              return worker.comparePasswords(password)
+                .then(function(foundWorker) {
+                  if(foundWorker) {
+                    var token = jwt.encode(worker, 'secret');
+                    res.json({
+                      token: token
+                    });
+                  } else {
+                    return next(new Error('No worker'));
+                  }
+                });
+            }
           }
-        })
-        .fail(function(error) {
-          next(error);
         });
     } else {
-      var findClient = Q.nbind(Client.find, Client);
-      findClient({where: {email: email}})
-        .then(function(client) {
-          if(!client) {
-            next(new Error('Client does not exist'));
+      Client.find({where: {email: email}})
+        .complete(function(err, client) {
+          if(err) {
+            console.log(err)
           } else {
-            return client.comparePasswords(password)
-              .then(function(foundClient) {
-                if(foundClient) {
-                  var token = jwt.encode(client, 'secret');
-                  res.json({
-                    token: token
-                  });
-                } else {
-                  return next(new Error('No client'));
-                }
-              });
+            if(!client) {
+              next(new Error('Client does not exist'));
+            } else {
+              return client.comparePasswords(password)
+                .then(function(foundClient) {
+                  if(foundClient) {
+                    var token = jwt.encode(client, 'secret');
+                    res.json({
+                      token: token
+                    });
+                  } else {
+                    return next(new Error('No client'));
+                  }
+                });
+            }
           }
-        })
-        .fail(function(error) {
-          next(error);
         });
     }
   },
@@ -272,6 +272,26 @@ module.exports = {
       } else {
         console.log("In Edit Profile controller method. Worker does not exist.")
       }
+    }
+  },
+
+  getuser: function(req, res, next) {
+    var accountType = req.body.accountType,
+      email = req.body.email,
+      query;
+
+    if(accountType === 'Worker') {
+      query = {where: {email: email}};
+      Worker.find(query).complete(function(profile) {
+        res.send(profile);
+        res.end('you are in viewprofile');
+      });
+    } else {
+      query = {where: {email: email}};
+      Client.find(query).complete(function(profile) {
+        res.send(profile);
+        res.end('you are in viewprofile');
+      });
     }
   }
 };

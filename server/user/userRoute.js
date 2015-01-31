@@ -7,4 +7,5 @@ module.exports = function(app){
   app.get('/signedin', userController.checkAuth);
   app.get('/viewprofile', userController.viewprofile);
   app.post('/editprofile', userController.editprofile);
+  app.post('/getuser', userController.getuser);
 };

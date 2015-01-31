@@ -11,7 +11,7 @@ angular.module('badgerApp')
     $scope.user.accountType = $scope.accountOptions[0];
 
     $scope.login = function(form) {
-      console.log(form)
+      console.log(form);
       $scope.submitted = true;
 
       if(form.$valid) {
@@ -24,7 +24,11 @@ angular.module('badgerApp')
         })
         .then( function() {
           // If login is successful, then redirect to main page.
-          $location.path('/');
+          if($scope.user.accountType === 'Worker'){
+            $location.path('/workerdashboard');
+          } else {
+            $location.path('/clientdashboard');
+          }
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
