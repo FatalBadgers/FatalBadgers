@@ -202,7 +202,7 @@ module.exports = {
     }
   },
 
-  viewprofile: function(req, res, next) {
+  viewProfile: function(req, res, next) {
     var accountType = req.body.accountType,
       email = req.body.email;
 
@@ -221,7 +221,7 @@ module.exports = {
     }
   },
 
-  editprofile: function(req, res, next) {
+  editProfile: function(req, res, next) {
     //if user posts an editprofile, then have it add to the database
     var email = req.body.email,
       password = req.body.password,
@@ -275,7 +275,7 @@ module.exports = {
     }
   },
 
-  getuser: function(req, res, next) {
+  getUser: function(req, res, next) {
     var accountType = req.body.accountType,
       email = req.body.email,
       query;
