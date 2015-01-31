@@ -70,17 +70,19 @@ mysql -u root
 
 Running grunt test will run the client and server unit tests with karma and mocha.
 
-Use grunt test:server to only run server tests.
+Use ```grunt test:server``` to only run server tests.
 
-Use grunt test:client to only run client tests.
+Use ```grunt test:client``` to only run client tests.
 
 ### Protractor tests
 
 To setup protractor e2e tests, you must first run
 
+```SH
 npm run update-webdriver
+```
 
-Use grunt test:e2e to have protractor go through tests located in the e2e folder.
+Use ```grunt test:e2e``` to have protractor go through tests located in the e2e folder.
 
 ### Roadmap
 
