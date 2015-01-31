@@ -8,16 +8,31 @@ exports.ihammerDatabase = require('../config/environment').mysql;
 exports.Workers = exports.ihammerDatabase.define("workers", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
-  location: Sequelize.STRING,
+  location: {
+    type: Sequelize.STRING,
+    defaultValue: 'No location provided'
+  },
   email: Sequelize.STRING,
   skills: Sequelize.TEXT,
-  'hourly_rate': Sequelize.BIGINT,
-  'avg_rating': Sequelize.STRING,
-  'img_url': Sequelize.STRING,
-  summary: Sequelize.TEXT,
+  'hourly_rate': {
+    type: Sequelize.BIGINT,
+    defaultValue: 0
+  },
+  'avg_rating': {
+    type: Sequelize.STRING,
+    defaultValue: 'No rating given yet'
+  },
+  'img_url': {
+    type: Sequelize.STRING,
+    defaultValue: '/../../assets/images/default.png'
+  },
+  summary: {
+    type: Sequelize.STRING,
+    defaultValue: 'No summary provided'
+  },
   'account_type': {
     type: Sequelize.STRING,
-    defaultValue: 'worker'
+    defaultValue: 'Worker'
   }
 }, {
   instanceMethods: {
@@ -54,14 +69,26 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
 exports.Clients = exports.ihammerDatabase.define("clients", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
-  location: Sequelize.STRING,
+  location: {
+    type: Sequelize.STRING,
+    defaultValue: 'No location provided'
+  },
   email: Sequelize.STRING,
-  'avg_rating': Sequelize.STRING,
-  'img_url': Sequelize.STRING,
-  summary: Sequelize.TEXT,
+  'avg_rating': {
+    type: Sequelize.STRING,
+    defaultValue: 'No rating given yet'
+  },
+  'img_url': {
+    type: Sequelize.STRING,
+    defaultValue: '/../../assets/images/default.png'
+  },
+  summary: {
+    type: Sequelize.STRING,
+    defaultValue: 'No summary provided'
+  },
   'account_type': {
     type: Sequelize.STRING,
-    defaultValue: 'client'
+    defaultValue: 'Client'
   }
 }, {
   instanceMethods: {
@@ -113,11 +140,20 @@ exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {});
 exports.Jobs = exports.ihammerDatabase.define("jobs", {
   title: Sequelize.STRING,
   applicants: Sequelize.INTEGER,
-  'hourly_rate': Sequelize.INTEGER,
-  summary: Sequelize.TEXT,
+  'hourly_rate': {
+    type: Sequelize.BIGINT,
+    defaultValue: 0
+  },
+  summary: {
+    type: Sequelize.STRING,
+    defaultValue: 'No summary provided'
+  },
   'skills_needed': Sequelize.TEXT,
   status: Sequelize.STRING,
-  'img_url': Sequelize.STRING
+  'img_url': {
+    type: Sequelize.STRING,
+    defaultValue: '/../../assets/images/default.png'
+  }
 });
 
 // create all associations between databases specified above

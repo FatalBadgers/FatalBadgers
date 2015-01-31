@@ -66,7 +66,7 @@ module.exports = {
       hourly_rate = req.body.hourly_rate,
       img_url = req.body.img_url,
       summary = req.body.summary,
-      create,
+      location = req.body.location,
       newWorker,
       newClient;
 
@@ -89,10 +89,14 @@ module.exports = {
                 accountType: accountType,
                 name: name,
                 'hourly_rate': hourly_rate,
-                'img_url': img_url,
                 'summary': summary,
-                skills: skills
+                skills: skills,
+                location: location
               };
+
+              if(img_url){
+                newWorker.img_url = img_url;
+              }
 
               Worker.setPassword(password).then(function(password) {
                 newWorker.password = password;
@@ -127,9 +131,13 @@ module.exports = {
                 accountType: accountType,
                 name: name,
                 'hourly_rate': hourly_rate,
-                'img_url': img_url,
-                'summary': summary
+                'summary': summary,
+                location: location
               };
+
+              if(img_url){
+                newWorker.img_url = img_url;
+              }
 
               Client.setPassword(password).then(function(password) {
                 newClient.password = password;
