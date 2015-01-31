@@ -8,6 +8,7 @@ var app = express();
 
 var Worker = require('../models').Workers;
 var Client = require('../models').Clients;
+var WorkersJobs = require('../models').WorkersJobs
 
 module.exports = {
   signin: function(req, res, next) {
@@ -273,5 +274,42 @@ module.exports = {
         console.log("In Edit Profile controller method. Worker does not exist.")
       }
     }
+  },
+
+  gethistory: function(req, res, next) {
+    
+    var accountType = req.body.accountType,
+        email = req.body.email;
+
+    if(accountType === 'Worker') {
+
+      var query = {where: {id_workers: req.body.id_workers}};
+      WorkersJobs.find(query).complete(function(history) {
+        res.send(history);
+        res.end('You are in get history');
+      })
+
+    } else {
+      var query = {where: {id_clients: id_clients}};
+      ClientsJobs.find(query).complete(function(history) {
+        res.send(history);
+        res.end('You are in get history');
+      })
+    }
+  },
+
+  endcontract: function(req, res, next) {
+    
+    var id = req.body.id
+
+    if(accountType === 'Worker') {
+
+
+
+    }
+
   }
+
+
+
 };

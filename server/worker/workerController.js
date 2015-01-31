@@ -19,65 +19,8 @@ var ClientReviews = db.ClientReviews;
 
 module.exports = {
 
-  signin: function (req, res, next) {
-    res.end('you are in signin');
-    //kevin 
-  },
 
-  signup: function (req, res, next) {
-    res.end('you are in signup');
-    //kevin
-  },
 
-  checkAuth: function (req, res, next) {
-    res.end('you are in checkauth');
-    //kevin
-  },
-
-  viewprofile: function(req, res, next) {
-    Worker.findAll()
-    
-    .then(function(worker){
-      res.json(worker);
-      // res.end();
-    })
-    // worker.workers(req, res);
-  },
-
-  createprofile: function(req, res, next){
-    console.log(req.body);
-    var profile = Worker.build(req.body);
-
-    profile.save().complete(function(err){
-      if(!!err){
-        console.log("err!");
-        res.status(500);
-        res.end();
-      }
-      else{
-        console.log("GREAT success");
-        res.json(profile);
-      }
-    });
-  },
-
-  editprofile: function(req, res, next) {
-    console.log(req.body);
-    var profile = Worker.build(req.body);
-
-    profile.save().complete(function(err){
-      if(err){
-        console.log('err!');
-        res.status(500);
-        res.end();
-      } else {
-        console.log("Successfully edited profile");
-        res.json(profile);
-        //redirect to Worker Dashboard
-      }
-    })
-    // res.end('Edit Profile');
-  },
 
   gethistory: function(req, res, next) {
     console.log('hello get history');
