@@ -9,5 +9,5 @@ module.exports = function(app){
   app.post('/editprofile', userController.editprofile);
   app.get('/history', userController.gethistory);
   app.post('/endcontract', userController.endcontract);
-
+  app.post('/getuser', userController.getUser);
 };
