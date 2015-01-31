@@ -8,7 +8,10 @@ var app = express();
 
 var Worker = require('../models').Workers;
 var Client = require('../models').Clients;
-var WorkersJobs = require('../models').WorkersJobs
+var WorkersJobs = require('../models').WorkersJobs;
+var ClientsJobs = require('../models').ClientsJobs;
+var WorkerReviews = require('../models').WorkerReviews;
+var ClientReviews = require('../models').ClientReviews;
 
 module.exports = {
   signin: function(req, res, next) {
@@ -223,11 +226,9 @@ module.exports = {
     }
   },
 
-<<<<<<< HEAD
   gethistory: function(req, res, next) {
     
-    var accountType = req.body.accountType,
-        email = req.body.email;
+    var accountType = req.body.accountType;
 
     if(accountType === 'Worker') {
 
@@ -250,11 +251,21 @@ module.exports = {
     
     var id = req.body.id
 
-    if(accountType === 'Worker') {
+    if(req.body) {
+      var edit = {
+        id: id,
+        status: "complete"
+      };
 
-
-
+      Jobs.findOrCreate({where: edit}).complete(function(job) {
+        res.send(job);
+      }).catch(function(err) {
+        console.log(err);
+      });
+    } else {
+      console.log("In end contract controller. Job does not exist");
     }
+
   },
 
   getUser: function(req, res, next) {
@@ -275,8 +286,48 @@ module.exports = {
         res.end('you are in viewprofile');
       });
     }
+  },
+
+  review: function(req, res, next) {
+    var accountType = req.body.accountType,
+        id = req.body.id,
+        rating = req.body.rating,
+        comment = req.body.comment;
+
+    if(accountType === "Worker"){
+      if(req.body) {
+        var review = {
+          id: id,
+          comment: comment,
+          rating: rating,
+          id_clients: req.body.id_clients
+        };
+        WorkerReviews.findOrCreate({where: review}).complete(function(rating) {
+          res.send(rating);
+        }).catch(function(err) {
+          console.log(err);
+        });
+      } else {
+        console.log('In review controller method')
+      }  
+    } else {
+      if(req.body) {
+        var review = {
+          id: id,
+          comment: comment,
+          rating: rating,
+          id_workers: req.body.id_workers
+        };
+        ClientReviews.findOrCreate({where: review}).complete(function(rating) {
+          res.send(rating);
+        }).catch(function(err) {
+          console.log(err);
+        });
+      } else {
+        console.log("In review controller method")
+      }
+    }
+
   }
-
-
 
 };

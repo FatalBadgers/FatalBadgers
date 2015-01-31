@@ -109,6 +109,10 @@ exports.WorkerReviews = exports.ihammerDatabase.define("worker_reviews", {
 // define the workers_jobs database
 exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {});
 
+// define the clients_jobs database
+exports.ClientsJobs = exports.ihammerDatabase.define("clients_jobs", {});
+
+
 // define the jobs database
 exports.Jobs = exports.ihammerDatabase.define("jobs", {
   title: Sequelize.STRING,
@@ -161,6 +165,14 @@ exports.WorkersJobs.sync().complete(function(err) {
   }
 });
 
+exports.ClientsJobs.sync().complete(function(err) {
+  if(err) {
+    console.log('Error creating Clients Jobs:', err)
+  } else {
+    console.log('Clients Jobs database created successfully.')
+  }
+});
+
 exports.Jobs.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Jobs:', err)
@@ -184,6 +196,11 @@ exports.Jobs.belongsTo(exports.Clients);
 //Many to many relationship from workers to jobs
 exports.Workers.hasMany(exports.Jobs, {through: "workers_jobs"});
 exports.Jobs.belongsToMany(exports.Workers, {through: "workers_jobs"});
+
+//Many to many relationship from clients to jobs
+exports.Clients.hasMany(exports.Jobs, {through: "clients_jobs"});
+exports.Jobs.belongsToMany(exports.Clients, {through: "clients_jobs"});
+
 
 exports.ihammerDatabase
   .authenticate()

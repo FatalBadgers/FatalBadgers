@@ -10,4 +10,6 @@ module.exports = function(app){
   app.get('/history', userController.gethistory);
   app.post('/endcontract', userController.endcontract);
   app.post('/getuser', userController.getUser);
+  app.post('/review', userController.review);
+
 };

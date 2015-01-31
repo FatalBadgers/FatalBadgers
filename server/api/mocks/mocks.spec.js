@@ -77,15 +77,18 @@ describe('GET /api/mocks', function() {
   });
 
 
-   it('should respond with JSON array for history', function(done) {
-    request(app)
-      .get('/api/mocks/jobs')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .end(function(err, res) {
-        if (err) return done(err);
-        res.body.should.be.instanceof(Array);
-        done();
-      });
+ it('should respond with JSON array for history', function(done) {
+  request(app)
+    .get('/api/mocks/jobs')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(function(err, res) {
+      if (err) return done(err);
+      res.body.should.be.instanceof(Array);
+      done();
+    });
   });
+
+
+ 
 });
