@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: HomeCtrl', function () {
+describe('Controller: DashboardCtrl', function () {
 
   // load the controller's module
   beforeEach(module('badgerApp'));
 
-  var HomeCtrl, scope;
+  var DashboardCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    HomeCtrl = $controller('HomeCtrl', {
+    DashboardCtrl = $controller('DashboardCtrl', {
       $scope: scope
     });
   }));

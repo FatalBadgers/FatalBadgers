@@ -8,21 +8,19 @@
       <label>
         <dl class="lead dl-horizontal">
 
-          <div ng-if="isWorker">
-            <dt>Skills</dt>
-            <dd>{{viewee.skills}}</dd>
-            <dt>Statement</dt>
-            <dd>{{viewee.advert}}</dd>
-            <dt>Hourly Rate</dt>
-            <dd>${{viewee.rate}}</dd>
-          </div>
+          <dt>Skills</dt>
+          <dd>{{viewee.skills}}</dd>
+          <dt>Statement</dt>
+          <dd>{{viewee.summary}}</dd>
+          <dt>Hourly Rate</dt>
+          <dd>${{viewee.hourly_rate}}</dd>
 
           <dt>Location</dt>
           <dd>{{viewee.location}}</dd>
           <dt>Contact</dt>
           <dd>{{viewee.email}}</dd>
           <dt>User Rating</dt>
-          <dd>{{viewee.rating}}</dd>
+          <dd>{{viewee.avg_rating}}</dd>
         </dl>
       </label>
     </div>
@@ -34,7 +32,7 @@
     <div class="col-lg-12">
 
       <h1>{{viewee.name}}'s Project History</h1>
-      
+
       <table class="table table-striped">
         <tr ng-repeat="project in viewee.history">
           <td>
