@@ -9,7 +9,9 @@ angular.module('badgerApp')
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isAuth;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+    Auth.getCurrentUser().then(function(user){
+      $scope.currentUser = user;
+    });
 
     $scope.logout = function() {
       Auth.logout();

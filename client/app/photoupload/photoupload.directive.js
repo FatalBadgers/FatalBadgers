@@ -12,9 +12,7 @@ angular.module('badgerApp')
     return {
       templateUrl: 'app/photoupload/photoupload.html',
       restrict: 'EA',
-      link: function(scope, element, attrs) {
-      },
-      controller: function($scope, $http, $upload, $rootScope) {
+      controller: function($scope, $http, $upload, $rootScope, Auth) {
         $scope.imageUploads = [];
         $scope.abort = function(index) {
           $scope.upload[index].abort();
@@ -54,16 +52,23 @@ angular.module('badgerApp')
                   .then(function(response) {
                     file.progress = parseInt(100);
                     if(response.status === 201) {
-                      var data = xml2json.parser(response.data),
-                        parsedData;
-                      parsedData = {
+                      var data = xml2json.parser(response.data);
+                      var parsedData = {
                         location: data.postresponse.location,
                         bucket: data.postresponse.bucket,
                         key: data.postresponse.key,
                         etag: data.postresponse.etag
                       };
+
                       $scope.imageUploads.push(parsedData);
 
+                      //save image urls to workers / clients
+                      var imageUrls = [];
+                      $scope.imageUploads.forEach(function(user){
+                        imageUrls.push(user.location);
+                      });
+
+                      Auth.setImages(imageUrls);
                     } else {
                       alert('Upload Failed');
                     }

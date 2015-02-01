@@ -73,8 +73,21 @@ angular.module('badgerApp')
         return !!$cookieStore.get('token');
       },
 
-      getCurrentUser: function(){
-        return currentUser;
+      getCurrentUser: function(callback){
+        var cb = callback || angular.noop;
+        return User.getUser({email: currentUser.email, accountType: currentUser.account_type}, function(user){
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      getImages: function(){
+        return currentUser.img_url;
+      },
+
+      setImages: function(imageUrls){
+        currentUser.img_url = imageUrls[0];
       }
     }
   });
