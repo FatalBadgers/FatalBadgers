@@ -8,8 +8,6 @@ var app = express();
 
 var Worker = require('../models').Workers;
 var Client = require('../models').Clients;
-var WorkersJobs = require('../models').WorkersJobs;
-var ClientsJobs = require('../models').ClientsJobs;
 var WorkerReviews = require('../models').WorkerReviews;
 var ClientReviews = require('../models').ClientReviews;
 
