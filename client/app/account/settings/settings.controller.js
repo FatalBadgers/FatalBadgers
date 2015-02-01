@@ -5,13 +5,13 @@ angular.module('badgerApp')
 
     $scope.errors = {};
     $scope.minPasswordLength = 3;
-    Auth.getCurrentUser().then(function(user){
+    Auth.getCurrentUser().then(function(user) {
       $scope.user = user;
       $scope.isWorker = ($scope.user.account_type === 'Worker');
     });
 
     $scope.updateProfile = function(form) {
-      if (form.$valid) {
+      if(form.$valid) {
         var updates = {
           name: $scope.user.name,
           location: $scope.user.location,
@@ -23,11 +23,11 @@ angular.module('badgerApp')
           accountType: $scope.user.account_type
         };
 
-        Auth.editProfile(updates)
-          .then(function() {
+        return Auth.editProfile(updates)
+          .then(function(user) {
             $scope.message = 'Profile successfully updated.'
           })
-          .catch(function() {
+          .catch(function(err) {
             $scope.message = 'Error updating profile. Please try again later.';
           });
       }
@@ -35,7 +35,7 @@ angular.module('badgerApp')
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
-      if (form.$valid) {
+      if(form.$valid) {
         Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
           .then(function() {
             $scope.message = 'Password successfully changed.';
