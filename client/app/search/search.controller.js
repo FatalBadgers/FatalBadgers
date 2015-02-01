@@ -1,7 +1,8 @@
 angular.module('badgerApp')
   .controller('SearchCtrl', function($scope, $http, $location) {
     //determine whether on worker or contract search screen
-    $location.path() === '/worker/search' ? $scope.isWorkerSearch = true : $scope.isWorkerSearch = false;
+    var path = $location.path();
+    path === '/worker/search' ? $scope.isWorkerSearch = false : $scope.isWorkerSearch = true;
 
     $scope.entry = {};
     $scope.clear = function() {
@@ -9,16 +10,33 @@ angular.module('badgerApp')
     };
 
     $scope.refreshTypeahead = function(entry) {
-      return $http.get('/api/workers?q=' + entry).then(function(response) {
-        $scope.entries = response.data.results
-      });
+      entry = entry || "";
+      if($scope.isWorkerSearch) {
+        return $http.get('/api/worker?q=' + entry).then(function(response) {
+          $scope.entries = response.data;
+        });
+      } else {
+        return $http.get('/api/contract?q=' + entry).then(function(response) {
+          $scope.entries = response.data;
+        });
+      }
     };
 
-    $scope.doSearch = function(item, model) {
-      return $http.get('/api/workers?q=' + item).then(function(response) {
-        $scope.searchResults = response.data.results
-      });
+    $scope.doSearch = function(item) {
+      var query = item ? item.name : "";
+      if($scope.isWorkerSearch) {
+        return $http.get('/api/worker?q=' + query).then(function(response) {
+          $scope.searchResults = response.data;
+        });
+      } else {
+        return $http.get('/api/contract?q=' + query).then(function(response) {
+          $scope.entries = response.data;
+        });
+      }
     };
+
+    //init
+    $scope.doSearch();
   })
 
 /**
