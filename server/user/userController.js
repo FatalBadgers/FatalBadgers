@@ -226,48 +226,6 @@ module.exports = {
     }
   },
 
-  getHistory: function(req, res, next) {
-    
-    var accountType = req.body.accountType;
-
-    if(accountType === 'Worker') {
-
-      var query = {where: {id_workers: req.body.id_workers}};
-      WorkersJobs.find(query).complete(function(history) {
-        res.send(history);
-        res.end('You are in get history');
-      })
-
-    } else {
-      var query = {where: {id_clients: id_clients}};
-      ClientsJobs.find(query).complete(function(history) {
-        res.send(history);
-        res.end('You are in get history');
-      })
-    }
-  },
-
-  endContract: function(req, res, next) {
-    
-    var id = req.body.id
-
-    if(req.body) {
-      var edit = {
-        id: id,
-        status: "complete"
-      };
-
-      Jobs.findOrCreate({where: edit}).complete(function(job) {
-        res.send(job);
-      }).catch(function(err) {
-        console.log(err);
-      });
-    } else {
-      console.log("In end contract controller. Job does not exist");
-    }
-
-  },
-
   getUser: function(req, res, next) {
     var accountType = req.body.accountType,
       email = req.body.email,

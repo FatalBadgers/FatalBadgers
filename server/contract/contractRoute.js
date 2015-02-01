@@ -1,7 +1,9 @@
 var express = require('express');
-var workerController = require('./contractController.js');
+var contractController = require('./contractController.js');
 
 module.exports = function(app){
-
-//TODO: Add any contract specific routes.
+	app.post('/createjob', contractController.createJob);
+	app.post('/editjob', contractController.editJob);
+	app.post('/endjob', contractController.endJob);
+	app.get('/gethistory', userController.getHistory);
 };
