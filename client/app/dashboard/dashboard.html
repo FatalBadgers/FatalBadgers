@@ -11,7 +11,7 @@
       <a class="btn btn-primary btn-lg" href="/create-contract" role="button">Create A Contract</a>
     </p>
 
-    <p ng-if="!currentUser.account_type !== 'Worker'">
+    <p ng-if="currentUser.account_type !== 'Worker'">
       <a class="btn btn-primary btn-lg" href="/end-contract" role="button">Ended Contracts</a>
     </p>
 

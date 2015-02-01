@@ -33,6 +33,10 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
   'account_type': {
     type: Sequelize.STRING,
     defaultValue: 'Worker'
+  },
+  'worker_reviewId': {
+    type: Sequelize.STRING,
+    defaultValue: 'Client'
   }
 }, {
   instanceMethods: {
@@ -89,6 +93,10 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
   'account_type': {
     type: Sequelize.STRING,
     defaultValue: 'Client'
+  },
+  'client_reviewId': {
+    type: Sequelize.STRING,
+    defaultValue: 'Client'
   }
 }, {
   instanceMethods: {
@@ -124,17 +132,21 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
 // define the client_review database
 exports.ClientReviews = exports.ihammerDatabase.define("client_reviews", {
   comment: Sequelize.STRING,
-  rating: Sequelize.INTEGER
+  rating: Sequelize.INTEGER,
+  clientId: Sequelize.INTEGER
 });
 
 // define the worker_reviews database
 exports.WorkerReviews = exports.ihammerDatabase.define("worker_reviews", {
   comment: Sequelize.STRING,
-  rating: Sequelize.INTEGER
+  rating: Sequelize.INTEGER,
+  workerId: Sequelize.INTEGER
 });
 
 // define the workers_jobs database
-exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {});
+exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {
+  workerId: Sequelize.INTEGER
+});
 
 // define the jobs database
 exports.Jobs = exports.ihammerDatabase.define("jobs", {
@@ -153,7 +165,10 @@ exports.Jobs = exports.ihammerDatabase.define("jobs", {
   'img_url': {
     type: Sequelize.STRING,
     defaultValue: '/../../assets/images/default.png'
-  }
+  },
+  clientId: Sequelize.INTEGER,
+  workerId: Sequelize.INTEGER,
+  workers_jobsId: Sequelize.INTEGER
 });
 
 // create all associations between databases specified above
