@@ -179,18 +179,17 @@ module.exports = {
   editProfile: function(req, res, next) {
     //if user posts an editprofile, then have it add to the database
     var email = req.body.email,
-      password = req.body.password,
       accountType = req.body.accountType,
       name = req.body.name,
       hourly_rate = req.body.hourly_rate,
       img_url = req.body.img_url,
+      skills = req.body.skills,
       summary = req.body.summary;
 
     if(accountType === 'Worker') {
       if(req.body) {
         var edit = {
           email: email,
-          password: password,
           accountType: accountType,
           name: name,
           'hourly_rate': hourly_rate,
@@ -199,10 +198,12 @@ module.exports = {
           skills: skills
         };
 
-        Worker.findOrCreate({where: edit}).complete(function(profile) {
-          res.send(profile);
-        }).catch(function(err) {
-          console.log(err);
+        Worker.update(edit, {where: {email: edit.email}}).complete(function(err, affectedRows) {
+          if(err){
+            console.log(err);
+          }
+
+          res.send({affectedRows: affectedRows});
         });
       } else {
         console.log("In Edit Profile controller method. Worker does not exist.")
@@ -211,7 +212,6 @@ module.exports = {
       if(req.body) {
         var edit = {
           email: email,
-          password: password,
           accountType: accountType,
           name: name,
           'hourly_rate': hourly_rate,
@@ -219,10 +219,12 @@ module.exports = {
           'summary': summary
         };
 
-        Client.findOrCreate({where: edit}).complete(function(profile) {
-          res.send(profile);
-        }).catch(function(err) {
-          console.log(err);
+        Client.update(edit, {where: {email: edit.email}}).complete(function(err, affectedRows) {
+          if(err){
+            console.log(err);
+          }
+
+          res.send({affectedRows: affectedRows});
         });
       } else {
         console.log("In Edit Profile controller method. Worker does not exist.")
@@ -237,13 +239,21 @@ module.exports = {
 
     if(accountType === 'Worker') {
       query = {where: {email: email}};
-      Worker.find(query).complete(function(profile) {
+      Worker.find(query).complete(function(err, profile) {
+        if(err){
+          console.log(err);
+        }
+
         res.send(profile);
         res.end('you are in viewprofile');
       });
     } else {
       query = {where: {email: email}};
-      Client.find(query).complete(function(profile) {
+      Client.find(query).complete(function(err, profile) {
+        if(err){
+          console.log(err);
+        }
+
         res.send(profile);
         res.end('you are in viewprofile');
       });
