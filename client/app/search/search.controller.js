@@ -2,7 +2,7 @@ angular.module('badgerApp')
   .controller('SearchCtrl', function($scope, $http, $location) {
     //determine whether on worker or contract search screen
     var path = $location.path();
-    path === '/worker/search' ? $scope.isWorkerSearch = false : $scope.isWorkerSearch = true;
+    path === '/worker/search' ? $scope.isWorkerSearch = true : $scope.isWorkerSearch = false;
 
     $scope.entry = {};
     $scope.clear = function() {
