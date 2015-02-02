@@ -8,19 +8,6 @@ angular.module('badgerApp')
       },
       
       {
-        editJob: {
-          method: 'POST',
-          params: {
-            controller: 'editJob',
-            title: null,
-            'hourly_rate': null,
-            summary: null,
-            'skills_needed': null,
-            status: null,
-            'img_url': null
-          }
-        },
-
         createJob: {
           method: 'POST',
           params: {
@@ -34,6 +21,19 @@ angular.module('badgerApp')
           }
         },
 
+        editJob: {
+          method: 'POST',
+          params: {
+            controller: 'editJob',
+            title: null,
+            'hourly_rate': null,
+            summary: null,
+            'skills_needed': null,
+            status: null,
+            'img_url': null
+          }
+        },
+        
         endJob: {
           method: 'POST',
           params: {
