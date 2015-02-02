@@ -1,47 +1,39 @@
-var models = require('../models/index.js'),
-    Q    = require('q'),
-    jwt  = require('jwt-simple');
+var Q = require('q');
+var express = require('express');
+var app = express();
+var Sequelize = require("sequelize");
 
-//do i need to instantiate a new worker?
+app.set('models', require('../models'));
+var Worker = app.get('models').Workers;
 
 module.exports = {
-  signin: function (req, res, next) {
+  getWorkers: function(req, res, next) {
+    var query = req.query.q;
+    var queryParameters = {};
 
-    //kevin
-  },
+    if(query) {
+      queryParameters = {
+        where: Sequelize.or({
+          name: {
+            like: '%' + query + '%'
+          }
+        }, {
+          skills: {
+            like: '%' + query + '%'
+          }
+        }),
+        limit: 10
+      }
+    }
 
-  signup: function (req, res, next) {
-    //kevin
-  },
+    Worker.findAll(queryParameters).
+      complete(function(err, workers) {
+        if(err) {
+          console.log(err);
+        }
 
-  checkAuth: function (req, res, next) {
-    // checking to see if the user is authenticated
-    // grab the token in the header is any
-    // then decode the token, which we end up being the user object
-    // check to see if that user exists in the database
-
-  },
-
-  viewprofile: function(req, res, next){
-    var query = {where: {'email' : req.body.email}};
-    sendResponse(res, query);
-  },
-
-  editprofile: function(req, res, next){
-    //if user posts an editprofile, then have it add to the database
-    if(req.user){
-      var edit = {
-        location: req.body.location,
-        skills: req.body.skills,
-        summary: req.body.summary
-      };
-      findOrCreate(edit).success(function(){
-        sendResponse(res, {});
+        res.send(workers);
       });
-    } else{
-      console.log("In Edit Profile controller. User does not exist.")
-    }  
   }
-
 
 };

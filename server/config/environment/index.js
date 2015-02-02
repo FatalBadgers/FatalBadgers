@@ -18,9 +18,6 @@ var all = {
   // Root path of server
   root: path.normalize(__dirname + '/../../..'),
 
-  // Server port
-  port: process.env.PORT || 9000,
-
   // Should we populate the DB with sample data?
   seedDB: false,
 
@@ -30,17 +27,7 @@ var all = {
   },
 
   // List of user roles
-  userRoles: ['guest', 'user', 'admin'],
-
-  // MongoDB connection options
-  mongo: {
-    options: {
-      db: {
-        safe: true
-      }
-    }
-  },
-
+  userRoles: ['guest', 'user', 'admin']
 };
 
 // Export the config object based on the NODE_ENV
