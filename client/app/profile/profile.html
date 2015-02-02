@@ -34,7 +34,12 @@
       <h1>{{viewee.name}}'s Project History</h1>
 
       <table class="table table-striped">
-        <tr ng-repeat="project in viewee.history">
+
+        <div ng-if="!(viewee.history.length > 0)">
+          No previous jobs to show.
+        </div>
+
+        <tr ng-if="viewee.history.length > 0" ng-repeat="project in viewee.history">
           <td>
             <h4>{{project.title}}</h4>
             <p>{{project.summary}}</p>
