@@ -7,21 +7,20 @@ var app = express();
 var Sequelize = require("sequelize");
 
 app.set('models', require('../models'));
-<<<<<<< HEAD
 
 var Worker = app.get('models').Workers;
 var Client = app.get('models').Clients;
 var Jobs = app.get('models').Jobs;
 
 module.exports = {
-  createJob: function(req, res, next){
+  createJob: function(req, res, next) {
     var id_clients = req.body.id_clients,
-        title = req.body.title,
-        hourly_rate = req.body.hourly_rate,
-        summary = req.body.summary,
-        skills_needed = req.body.skills_needed,
-        status = req.body.status,
-        img_url = req.body.img_url
+      title = req.body.title,
+      hourly_rate = req.body.hourly_rate,
+      summary = req.body.summary,
+      skills_needed = req.body.skills_needed,
+      status = req.body.status,
+      img_url = req.body.img_url
 
     var newJob = {
       title: title,
@@ -44,16 +43,16 @@ module.exports = {
 
   },
 
-  editJob: function(req, res, next){
+  editJob: function(req, res, next) {
     var id_clients = req.body.id_clients,
-        title = req.body.title,
-        hourly_rate = req.body.hourly_rate,
-        summary = req.body.summary,
-        skills_needed = req.body.skills_needed,
-        status = req.body.status,
-        img_url = req.body.img_url;
+      title = req.body.title,
+      hourly_rate = req.body.hourly_rate,
+      summary = req.body.summary,
+      skills_needed = req.body.skills_needed,
+      status = req.body.status,
+      img_url = req.body.img_url;
 
-    if (req.body) {
+    if(req.body) {
       var edit = {
         title: title,
         'hourly_rate': hourly_rate,
@@ -70,7 +69,8 @@ module.exports = {
       });
     } else {
       console.log("In Edit Job controller method. Job does not exist.")
-    };
+    }
+    ;
 
   },
 
@@ -114,12 +114,8 @@ module.exports = {
         res.end('You are in get history');
       })
     }
-  }
+  },
 
-
-var Job = app.get('models').Jobs;
-
-module.exports = {
   getContracts: function(req, res, next) {
     var query = req.query.q;
     var queryParameters = {};
@@ -148,7 +144,6 @@ module.exports = {
         res.send(workers);
       });
   }
->>>>>>> 5663e6b185c2568a89c409e5a5b53053c177d6e2
 };
 
 
