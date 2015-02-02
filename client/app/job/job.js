@@ -12,5 +12,10 @@ angular.module('badgerApp')
         url: '/edit-job',
         templateUrl: 'route/job/edit/edit.html',
         controller: 'EditCtrl'
+      })
+      .state('create-job', {
+        url: '/create-job',
+        templateUrl: 'route/job/create/create.html',
+        controller: 'CreateCtrl'
       });
   });
