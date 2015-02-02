@@ -1,61 +1,43 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<div class="dashboard col-md-8">
-  <h3>Welcome, {{currentUser.name}}</h3>
-
-  <h1>DASHBOARD</h1>
-
-  <div class="col-md-6">
-    <!--if user is client-->
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/create-contract" role="button">Create A Contract</a>
-    </p>
-
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/end-contract" role="button">Ended Contracts</a>
-    </p>
-
-    <!--if user is worker-->
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/current-contracts" role="button">Current Contracts</a>
-    </p>
-
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/past-contracts" role="button">Past Contracts</a>
-    </p>
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <label>
+      <h1>{{currentUser.name}}'s Dashboard</h1>
+    </label>
   </div>
+</header>
 
-  <div class="col-md-6">
-    <!--if user is client-->
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/manage-contracts" role="button">Manage Contracts</a>
-    </p>
+<div class="container">
+  <div class="row-fluid">
+    <div class="col-md-4">
+      <br>
+      <h3>Profile Snapshot</h3>
+      <dl>
+        <dt><img src="{{currentUser.img_url}}" class="profile-pic img-rounded"></dt>
+        <dt>Location</dt>
+        <dd>{{currentUser.location}}</dd><br>
+        <dt>Summary</dt>
+        <dd>{{currentUser.summary}}</dd><br>
+        <dt>User Rating</dt>
+        <dd>{{currentUser.avg_rating}} </dd><br>
+        <!-- Worker profile info -->
+        <div ng-if="currentUser.accountType === 'Worker'">
+          <dt>Skills</dt>
+          <dd>{{currentUser.skills}}</dd><br>
+          <dt>Rate</dt>
+          <dd>{{currentUser.rate}}</dd><br>
+        </div>
+      </dl>
+    </div>
 
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/worker/search" role="button">Search Workers</a>
-    </p>
+    <div class="col-lg-8">
+      <br>
+      <ul class="quicklinks nav nav-stacked col-md-6 col-lg-6 col-sm-6 ng-scope" ng-repeat="link in commonLinks"><br>
+        <li>
+          <a class="btn btn-primary btn-lg"ng-href="{{link.href}}" role="button">{{link.title}}</a>
+        </li>
+      </ul><br>
+      </div>
+    </div>
 
-    <!--if user is worker-->
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/applications" role="button">Applications</a>
-    </p>
-
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/contract/search" role="button">Search Contracts</a>
-    </p>
   </div>
-</div>
-
-<div class="col-md-4">
-  <br><br>
-  <h3>Profile snapshot:</h3>
-  <img src="{{currentUser.img_url}}" class="profile-pic img-rounded pull-left">
-  <dl class="lead dl-horizontal">
-    <dt>Location</dt>
-    <dd>{{currentUser.location}}</dd>
-    <dt>Summary</dt>
-    <dd>{{currentUser.summary}}</dd>
-    <dt>User Rating</dt>
-    <dd>{{currentUser.avg_rating}} </dd>
-  </dl>
 </div>
