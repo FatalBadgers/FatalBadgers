@@ -8,10 +8,7 @@ exports.ihammerDatabase = require('../config/environment').mysql;
 exports.Workers = exports.ihammerDatabase.define("workers", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
-  location: {
-    type: Sequelize.STRING,
-    defaultValue: 'No location provided'
-  },
+  location: Sequelize.STRING,
   email: Sequelize.STRING,
   skills: Sequelize.TEXT,
   'hourly_rate': {
@@ -73,10 +70,7 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
 exports.Clients = exports.ihammerDatabase.define("clients", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
-  location: {
-    type: Sequelize.STRING,
-    defaultValue: 'No location provided'
-  },
+  location: Sequelize.STRING,
   email: Sequelize.STRING,
   'avg_rating': {
     type: Sequelize.STRING,
