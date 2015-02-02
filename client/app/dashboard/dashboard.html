@@ -1,11 +1,36 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <label>
+      <h1>{{currentUser.name}}'s Dashboard</h1>
+    </label>
+  </div>
+</header>
 
 <div class="dashboard col-md-8">
-  <h3>Welcome, {{currentUser.name}}</h3>
-
-  <h1>DASHBOARD</h1>
+  <div class="col-md-4">
+    <br>
+    <h3>Profile Snapshot</h3>
+    <img src="{{currentUser.img_url}}" class="profile-pic img-rounded pull-left">
+    <dl>
+      <dt>Location</dt>
+      <dd>{{currentUser.location}}</dd><br>
+      <dt>Summary</dt>
+      <dd>{{currentUser.summary}}</dd><br>
+      <dt>User Rating</dt>
+      <dd>{{currentUser.avg_rating}} </dd><br>
+      <!-- Worker profile info -->
+      <div ng-if="currentUser.accountType === 'Worker'">
+        <dt>Skills</dt>
+        <dd>{{currentUser.skills}}</dd><br>
+        <dt>Rate</dt>
+        <dd>{{currentUser.rate}}</dd><br>
+      </div>
+    </dl>
+  </div>
 
   <div class="col-md-6">
+    <br>
+    <h3>Common Links</h3>
     <!--if user is client-->
     <p ng-if="currentUser.account_type !== 'Worker'">
       <a class="btn btn-primary btn-lg" href="/create-contract" role="button">Create A Contract</a>
@@ -46,16 +71,3 @@
   </div>
 </div>
 
-<div class="col-md-4">
-  <br><br>
-  <h3>Profile snapshot:</h3>
-  <img src="{{currentUser.img_url}}" class="profile-pic img-rounded pull-left">
-  <dl class="lead dl-horizontal">
-    <dt>Location</dt>
-    <dd>{{currentUser.location}}</dd>
-    <dt>Summary</dt>
-    <dd>{{currentUser.summary}}</dd>
-    <dt>User Rating</dt>
-    <dd>{{currentUser.avg_rating}} </dd>
-  </dl>
-</div>
