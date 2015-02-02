@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('badgerApp')
-  .controller('SignupCtrl', function($scope, Auth, $location) {
+  .controller('SignupCtrl', function($scope, Auth, $state) {
     $scope.user = {};
     $scope.errors = {};
     $scope.minPasswordLength = 3;
@@ -30,7 +30,7 @@ angular.module('badgerApp')
         Auth.createUser(newUser)
           .then(function() {
             // Account created, redirect to home.
-            $location.path('/dashboard');
+            $state.go('dashboard');
           })
           .catch(function(err) {
             $scope.errors.other = err.message;
