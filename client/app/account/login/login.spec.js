@@ -24,10 +24,17 @@ describe('Controller: LoginCtrl', function () {
     //   accountType: 'client'
     // };
 
+    var fakeWindow = {
+      location: {
+        href: ''
+      }
+    };
+
     // Create controller for testing
     createController = function() {
       LoginCtrl = $controller('LoginCtrl', {
-        $scope: $scope
+        $scope: $scope,
+        $window: fakeWindow
       });
     };
     createController();
