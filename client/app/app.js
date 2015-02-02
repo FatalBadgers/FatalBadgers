@@ -17,7 +17,7 @@ angular.module('badgerApp', [
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
   })
 
   .factory('AttachTokens', function($cookieStore) {

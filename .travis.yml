@@ -5,8 +5,6 @@ before_script:
   - npm install -g bower grunt-cli
   - bower install
   - mysql -e 'create database ihammer;'
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 env:
   global:
     - BUCKET=ihammer-dev
