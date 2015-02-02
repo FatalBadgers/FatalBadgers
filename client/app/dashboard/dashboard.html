@@ -6,8 +6,8 @@
   </div>
 </header>
 
-<div class="dashboard col-md-8">
-  <div class="col-md-4">
+<div class="row-fluid">
+  <div class="col-md-3">
     <br>
     <h3>Profile Snapshot</h3>
     <img src="{{currentUser.img_url}}" class="profile-pic img-rounded pull-left">
@@ -28,46 +28,51 @@
     </dl>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-9">
     <br>
     <h3>Common Links</h3>
-    <!--if user is client-->
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/create-contract" role="button">Create A Contract</a>
-    </p>
+    <div class="row-fluid">
+      <div class="col-md-6">
+        <!--if user is client-->
+        <p ng-if="currentUser.account_type !== 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/create-contract" role="button">Create A Contract</a>
+        </p>
 
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/end-contract" role="button">Ended Contracts</a>
-    </p>
+        <p ng-if="currentUser.account_type !== 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/end-contract" role="button">Ended Contracts</a>
+        </p>
 
-    <!--if user is worker-->
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/current-contracts" role="button">Current Contracts</a>
-    </p>
+        <!--if user is worker-->
+        <p ng-if="currentUser.account_type === 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/current-contracts" role="button">Current Contracts</a>
+        </p>
 
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/past-contracts" role="button">Past Contracts</a>
-    </p>
-  </div>
+        <p ng-if="currentUser.account_type === 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/past-contracts" role="button">Past Contracts</a>
+        </p>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-md-6">
+        <!--if user is client-->
+        <p ng-if="currentUser.account_type !== 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/manage-contracts" role="button">Manage Contracts</a>
+        </p>
 
-  <div class="col-md-6">
-    <!--if user is client-->
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/manage-contracts" role="button">Manage Contracts</a>
-    </p>
+        <p ng-if="currentUser.account_type !== 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/worker/search" role="button">Search Workers</a>
+        </p>
 
-    <p ng-if="currentUser.account_type !== 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/worker/search" role="button">Search Workers</a>
-    </p>
+        <!--if user is worker-->
+        <p ng-if="currentUser.account_type === 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/applications" role="button">Applications</a>
+        </p>
 
-    <!--if user is worker-->
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/applications" role="button">Applications</a>
-    </p>
-
-    <p ng-if="currentUser.account_type === 'Worker'">
-      <a class="btn btn-primary btn-lg" href="/contract/search" role="button">Search Contracts</a>
-    </p>
+        <p ng-if="currentUser.account_type === 'Worker'">
+          <a class="btn btn-primary btn-lg" href="/contract/search" role="button">Search Contracts</a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
