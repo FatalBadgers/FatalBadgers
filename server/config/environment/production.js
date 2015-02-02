@@ -1,5 +1,7 @@
 'use strict';
 
+var Sequelize = require('sequelize');
+
 // Production specific configuration
 // =================================
 module.exports = {
