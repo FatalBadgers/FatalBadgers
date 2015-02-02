@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('badgerApp')
-  .controller('LoginCtrl', function($scope, Auth, $location) {
+  .controller('LoginCtrl', function($scope, Auth, $state) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -23,7 +23,7 @@ angular.module('badgerApp')
           })
           .then(function() {
             // If login is successful, then redirect to main page.
-            $location.path('/dashboard');
+            $state.go('dashboard');
           })
           .catch(function(err) {
             $scope.errors.other = err.message;
