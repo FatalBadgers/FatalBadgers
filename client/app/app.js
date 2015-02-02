@@ -10,8 +10,8 @@ angular.module('badgerApp', [
   'ui.select'
 ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    //$urlRouterProvider
+    //  .otherwise('/');
 
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
