@@ -36,7 +36,6 @@ describe('Directive: photoupload', function() {
     });
     file.name = 'abc.jpeg';
     var files = [file];
-
     $httpBackend.expectGET('/api/s3Policy?mimeType=' + files[0].type)
       .respond({
         s3Policy: 'base64Policy',
@@ -155,7 +154,6 @@ describe('Directive: photoupload', function() {
     file2.name = 'xyz.bmp';
 
     var files = [file1, file2];
-
     files.forEach(function(file) {
       $httpBackend.expectGET('/api/s3Policy?mimeType=' + file.type)
         .respond({
