@@ -8,16 +8,35 @@ exports.ihammerDatabase = require('../config/environment').mysql;
 exports.Workers = exports.ihammerDatabase.define("workers", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
-  location: Sequelize.STRING,
+  location: {
+    type: Sequelize.STRING,
+    defaultValue: 'No location provided'
+  },
   email: Sequelize.STRING,
   skills: Sequelize.TEXT,
-  'hourly_rate': Sequelize.BIGINT,
-  'avg_rating': Sequelize.STRING,
-  'img_url': Sequelize.STRING,
-  summary: Sequelize.TEXT,
+  'hourly_rate': {
+    type: Sequelize.BIGINT,
+    defaultValue: 0
+  },
+  'avg_rating': {
+    type: Sequelize.STRING,
+    defaultValue: 'No rating given yet'
+  },
+  'img_url': {
+    type: Sequelize.STRING,
+    defaultValue: '/../../assets/images/default.png'
+  },
+  summary: {
+    type: Sequelize.STRING,
+    defaultValue: 'No summary provided'
+  },
   'account_type': {
     type: Sequelize.STRING,
-    defaultValue: 'worker'
+    defaultValue: 'Worker'
+  },
+  'worker_reviewId': {
+    type: Sequelize.STRING,
+    defaultValue: 'Client'
   }
 }, {
   instanceMethods: {
@@ -54,14 +73,30 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
 exports.Clients = exports.ihammerDatabase.define("clients", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
-  location: Sequelize.STRING,
+  location: {
+    type: Sequelize.STRING,
+    defaultValue: 'No location provided'
+  },
   email: Sequelize.STRING,
-  'avg_rating': Sequelize.STRING,
-  'img_url': Sequelize.STRING,
-  summary: Sequelize.TEXT,
+  'avg_rating': {
+    type: Sequelize.STRING,
+    defaultValue: 'No rating given yet'
+  },
+  'img_url': {
+    type: Sequelize.STRING,
+    defaultValue: '/../../assets/images/default.png'
+  },
+  summary: {
+    type: Sequelize.STRING,
+    defaultValue: 'No summary provided'
+  },
   'account_type': {
     type: Sequelize.STRING,
-    defaultValue: 'client'
+    defaultValue: 'Client'
+  },
+  'client_reviewId': {
+    type: Sequelize.STRING,
+    defaultValue: 'Client'
   }
 }, {
   instanceMethods: {
@@ -97,31 +132,51 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
 // define the client_review database
 exports.ClientReviews = exports.ihammerDatabase.define("client_reviews", {
   comment: Sequelize.STRING,
-  rating: Sequelize.INTEGER
+  rating: Sequelize.INTEGER,
+  clientId: Sequelize.INTEGER
 });
 
 // define the worker_reviews database
 exports.WorkerReviews = exports.ihammerDatabase.define("worker_reviews", {
   comment: Sequelize.STRING,
-  rating: Sequelize.INTEGER
+  rating: Sequelize.INTEGER,
+  workerId: Sequelize.INTEGER
 });
 
 // define the workers_jobs database
-exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {});
+exports.WorkersJobs = exports.ihammerDatabase.define("workers_jobs", {
+  workerId: Sequelize.INTEGER
+});
+
+// define the clients_jobs database
+exports.ClientsJobs = exports.ihammerDatabase.define("clients_jobs", {});
+
 
 // define the jobs database
 exports.Jobs = exports.ihammerDatabase.define("jobs", {
   title: Sequelize.STRING,
   applicants: Sequelize.INTEGER,
-  'hourly_rate': Sequelize.INTEGER,
-  summary: Sequelize.TEXT,
+  'hourly_rate': {
+    type: Sequelize.BIGINT,
+    defaultValue: 0
+  },
+  summary: {
+    type: Sequelize.STRING,
+    defaultValue: 'No summary provided'
+  },
   'skills_needed': Sequelize.TEXT,
   status: Sequelize.STRING,
-  'img_url': Sequelize.STRING
+  'img_url': {
+    type: Sequelize.STRING,
+    defaultValue: '/../../assets/images/default.png'
+  },
+  clientId: Sequelize.INTEGER,
+  workerId: Sequelize.INTEGER,
+  workers_jobsId: Sequelize.INTEGER
 });
 
 // create all associations between databases specified above
-exports.Workers.sync({force: true}).complete(function(err) {
+exports.Workers.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Workers:', err)
   } else {
@@ -129,7 +184,7 @@ exports.Workers.sync({force: true}).complete(function(err) {
   }
 });
 
-exports.Clients.sync({force: true}).complete(function(err) {
+exports.Clients.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Clients:', err)
   } else {
@@ -137,7 +192,7 @@ exports.Clients.sync({force: true}).complete(function(err) {
   }
 });
 
-exports.WorkerReviews.sync({force: true}).complete(function(err) {
+exports.WorkerReviews.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Worker Reviews:', err)
   } else {
@@ -145,7 +200,7 @@ exports.WorkerReviews.sync({force: true}).complete(function(err) {
   }
 });
 
-exports.ClientReviews.sync({force: true}).complete(function(err) {
+exports.ClientReviews.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Client Reviews:', err)
   } else {
@@ -153,7 +208,7 @@ exports.ClientReviews.sync({force: true}).complete(function(err) {
   }
 });
 
-exports.WorkersJobs.sync({force: true}).complete(function(err) {
+exports.WorkersJobs.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Workers Jobs:', err)
   } else {
@@ -161,7 +216,15 @@ exports.WorkersJobs.sync({force: true}).complete(function(err) {
   }
 });
 
-exports.Jobs.sync({force: true}).complete(function(err) {
+exports.ClientsJobs.sync().complete(function(err) {
+  if(err) {
+    console.log('Error creating Clients Jobs:', err)
+  } else {
+    console.log('Clients Jobs database created successfully.')
+  }
+});
+
+exports.Jobs.sync().complete(function(err) {
   if(err) {
     console.log('Error creating Jobs:', err)
   } else {
@@ -184,6 +247,11 @@ exports.Jobs.belongsTo(exports.Clients);
 //Many to many relationship from workers to jobs
 exports.Workers.hasMany(exports.Jobs, {through: "workers_jobs"});
 exports.Jobs.belongsToMany(exports.Workers, {through: "workers_jobs"});
+
+//Many to many relationship from clients to jobs
+exports.Clients.hasMany(exports.Jobs, {through: "clients_jobs"});
+exports.Jobs.belongsToMany(exports.Clients, {through: "clients_jobs"});
+
 
 exports.ihammerDatabase
   .authenticate()

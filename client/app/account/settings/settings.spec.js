@@ -1,29 +1,29 @@
 'use strict';
 
 describe('Controller: SettingsCtrl', function () {
-  var SettingsCtrl, createController, user, exampleClient, exampleWorker,
-      $scope, $rootScope, $controller, $form;
-
+  var SettingsCtrl, createController, exampleClient, exampleWorker,
+      $scope, $rootScope, $controller, $form, $q, $httpBackend;
 
   // Load the controller's module
   beforeEach(module('badgerApp'));
-
-  var SettingsCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($injector) {
     $rootScope = $injector.get('$rootScope');
     $controller = $injector.get('$controller');
+    $q = $injector.get('$q');
+    $httpBackend = $injector.get('$httpBackend');
 
     $form = $("<form />");
     $scope = $rootScope.$new();
-    
+    $scope.form = {$valid: true};
+
     exampleClient = {
       name: 'Test Client',
       location: 'Test, IS',
       email: 'test@test.com',
       password: 'test',
-      accountType: 'Worker'
+      account_type: 'Client'
     };
 
     exampleWorker = {
@@ -31,10 +31,10 @@ describe('Controller: SettingsCtrl', function () {
       location: 'Test, IS',
       email: 'test@test.com',
       password: 'test',
-      accountType: 'Worker',
+      account_type: 'Worker',
       skills: "I'm a lumberjack.",
-      rate: '$69 / hour',
-      advert: "I'm okay. I sleep all night and I work all day."
+      hourly_rate: '69',
+      summary: "I'm okay. I sleep all night and I work all day."
     };
 
     // Create controller for testing
@@ -43,24 +43,62 @@ describe('Controller: SettingsCtrl', function () {
         $scope: $scope
       });
     };
-    createController();
+
   }));
 
-  // TODO: Once users accounts can be created, see comments below.
-  it('should display worker profile questions when current user is a worker.', function () {
-    $scope.user.accountType = 'Worker';
-    // Delete the line above this and uncomment lines below this.
-    // Auth.createUser(exampleWorker);
-    expect(!!$('#workerQuestions')).toEqual(true);
+  it('should send post request to update worker profile', function () {
+    var data;
+    $scope.user = exampleWorker;
+    // set up a deferred
+    var deferred = $q.defer();
+    // get promise reference
+    var promise = deferred.promise;
+
+    // check that http requests are getting handled correctly
+    $httpBackend.whenGET('/api/config').respond(200);
+    $httpBackend.whenPOST('/api/user/getuser').respond(302);
+    $httpBackend.whenPOST('/api/user/editprofile?accountType=Worker&email=test@test.com').respond(302);
+
+    // set up promise resolve callback
+    promise.then(function (response) {
+      data = response;
+    });
+
+    createController();
+    $scope.updateProfile($scope.form).then(function(){
+      deferred.resolve($scope.message);
+    });
+
+    $httpBackend.flush();
+
+    expect(data).toEqual('Error updating profile. Please try again later.');
   });
 
-  // TODO: Once users accounts can be created, see comments below.
-  it('should hide worker profile questions when current user is a client.', function () {
-    $scope.user.accountType = 'Client';
-    $scope.isWorker = false;
-    // Delete the two lines above this and uncomment lines below this.
-    // Auth.createUser(exampleWorker);
-    expect($scope.isWorker).toEqual(false);
-  });
+  it('should send post request to update client profile', function () {
+    var data;
+    $scope.user = exampleClient;
+    // set up a deferred
+    var deferred = $q.defer();
+    // get promise reference
+    var promise = deferred.promise;
 
+    // check that http requests are getting handled correctly
+    $httpBackend.whenGET('/api/config').respond(200);
+    $httpBackend.whenPOST('/api/user/getuser').respond(302);
+    $httpBackend.whenPOST('/api/user/editprofile?accountType=Client&email=test@test.com').respond(302);
+
+    // set up promise resolve callback
+    promise.then(function (response) {
+      data = response;
+    });
+
+    createController();
+    $scope.updateProfile($scope.form).then(function(){
+      deferred.resolve($scope.message);
+    });
+
+    $httpBackend.flush();
+
+    expect(data).toEqual('Error updating profile. Please try again later.');
+  });
 });

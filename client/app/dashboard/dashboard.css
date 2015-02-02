@@ -1,0 +1,12 @@
+.dashboard .btn.btn-primary.btn-lg{
+  margin-top: 30px;
+}
+
+.dl-horizontal dd {
+  margin-top: -30px;
+}
+
+.dl-horizontal dt {
+  margin-top: 15px;
+  float: none!important;
+}

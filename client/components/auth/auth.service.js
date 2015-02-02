@@ -3,33 +3,21 @@
 angular.module('badgerApp')
   // Set currentUser to an empty object and then they check if there is a cookie named (?) 'token'.
   // If it is then they call the User service method get, this should return a currentUser object.
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore) {
     var currentUser = {};
     if($cookieStore.get('token')) {
-      currentUser = User.get();
+      currentUser = $cookieStore.get('token');
     }
 
     return {
       // Authenticates user and saves token.
       // Returns a {Promise}.
-      login: function(user, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-
-        User.login(user).
-          success(function(data) {
-            $cookieStore.put('token', data.token);
-            currentUser = User.get();
-            deferred.resolve(data);
-            return cb();
-          }).
-          error(function(err) {
-            this.logout();
-            deferred.reject(err);
-            return cb(err);
-          }.bind(this));
-
-        return deferred.promise;
+      login: function(user) {
+        return User.login(user, function(data) {
+          $cookieStore.put('token', data);
+          currentUser = data;
+          return user;
+        }).$promise;
       },
 
       // Delete access token and user info.
@@ -40,41 +28,47 @@ angular.module('badgerApp')
 
       // Creates a new user.
       // Returns a {Promise}.
-      createUser: function(user, callback) {
-        var cb = callback || angular.noop;
+      createUser: function(user) {
         return User.signup(user, function(data) {
-          $cookieStore.put('token', data.token);
+          $cookieStore.put('token', data);
           currentUser = data;
-          return cb(user);
-        }, function(err) {
-          this.logout();
-          return cb(err);
-        }.bind(this)).$promise;
+          return user;
+        }).$promise;
       },
 
       // Changes a user's password.
       // Returns a {Promise}.
-      changePassword: function(oldPassword, newPassword, callback) {
-        var cb = callback || angular.noop;
+      changePassword: function(oldPassword, newPassword) {
         return User.editProfile({id: currentUser.id}, {
           oldPassword: oldPassword,
           newPassword: newPassword
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
         }).$promise;
       },
 
       // Changes a user's profile fields (except password).
       // Returns a {Promise}.
-      editProfile: function(userObject, callback) {
-        var cb = callback || angular.noop;
+      editProfile: function(userObject) {
         return User.editProfile(userObject, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
+          return user;
         }).$promise;
+      },
+
+      isAuth: function() {
+        return !!$cookieStore.get('token');
+      },
+
+      getCurrentUser: function(callback){
+        return User.getUser({email: currentUser.email, accountType: currentUser.account_type}, function(user){
+          return user;
+        }).$promise;
+      },
+
+      getImages: function(){
+        return currentUser.img_url;
+      },
+
+      setImages: function(imageUrls){
+        currentUser.img_url = imageUrls[0];
       }
-    };
+    }
   });

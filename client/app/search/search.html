@@ -7,7 +7,7 @@
            theme="bootstrap"
            reset-search-input="false"
            style="width: 300px;"
-           on-select="doSearch($item, $model)">
+           on-select="doSearch($item)">
   <ui-select-match placeholder="Search...">{{$select.selected.name}}</ui-select-match>
   <ui-select-choices repeat="entry in entries track by $index"
                      refresh="refreshTypeahead($select.search)"
@@ -16,11 +16,16 @@
   </ui-select-choices>
 </ui-select>
 
-<div class="container">
+<div class="search container">
   <div class="row">
     <div class="col-lg-12">
       <table class="table table-striped">
-        <tr ng-repeat="result in searchResults">
+
+        <div ng-if="!(searchResults.length > 0)">
+          No search results found. Try modifying your search.
+        </div>
+
+        <tr ng-if="searchResults.length > 0" ng-repeat="result in searchResults">
           <td>
             <img src="{{result.img_url}}" class="img-rounded pull-left">
 
@@ -34,7 +39,7 @@
                     <dt>Location</dt>
                     <dd>{{result.location}}</dd>
                     <dt>Skills & Services</dt>
-                    <dd>{{result.description}}</dd>
+                    <dd>{{result.skills}}</dd>
                     <dt>Hourly Rate</dt>
                     <dd>${{result.hourly_rate}}</dd>
                   </div>

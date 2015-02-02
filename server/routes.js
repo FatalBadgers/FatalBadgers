@@ -24,7 +24,7 @@ module.exports = function(app) {
 
   var contractRouter = express.Router();
   app.use('/api/contract', contractRouter);
-  require('./worker/workerRoute.js')(contractRouter);
+  require('./contract/contractRoute.js')(contractRouter);
 
   var workerRouter = express.Router();
   app.use('/api/worker', workerRouter);

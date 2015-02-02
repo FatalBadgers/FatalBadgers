@@ -4,48 +4,58 @@
 <!--[if IE 7]>
   <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-  <html class="no-js lt-ie9"> <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <base href="/">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(client) app/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,client}) app/app.css -->
-    <link rel="stylesheet" href="app/app.css">
-    <!-- injector:css -->
-    <link rel="stylesheet" href="app/about/about.css">
-    <link rel="stylesheet" href="app/account/account.css">
-    <link rel="stylesheet" href="app/app.css">
-    <link rel="stylesheet" href="app/home/home.css">
-    <link rel="stylesheet" href="app/job/job.css">
-    <link rel="stylesheet" href="app/main/main.css">
-    <link rel="stylesheet" href="app/photoupload/photoupload.css">
-    <link rel="stylesheet" href="app/profile/profile.css">
-    <link rel="stylesheet" href="app/search/search.css">
-    <link rel="stylesheet" href="components/modal/modal.css">
-    <!-- endinjector -->
-    <!-- endbuild -->
-  </head>
-  <body ng-app="badgerApp">
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="/">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(client) app/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,client}) app/app.css -->
+  <link rel="stylesheet" href="app/app.css">
+  <!-- injector:css -->
+  <link rel="stylesheet" href="app/about/about.css">
+  <link rel="stylesheet" href="app/account/account.css">
+  <link rel="stylesheet" href="app/app.css">
+  <link rel="stylesheet" href="app/dashboard/dashboard.css">
+  <link rel="stylesheet" href="app/job/job.css">
+  <link rel="stylesheet" href="app/main/main.css">
+  <link rel="stylesheet" href="app/photoupload/photoupload.css">
+  <link rel="stylesheet" href="app/profile/profile.css">
+  <link rel="stylesheet" href="app/search/search.css">
+  <link rel="stylesheet" href="app/star-rating/star-rating.css">
+  <link rel="stylesheet" href="components/modal/modal.css">
+  <link rel="stylesheet" href="components/navbar/navbar.css">
+  <!-- endinjector -->
+  <!-- endbuild -->
+</head>
+<body ng-app="badgerApp">
+>>>>>>> b5096ed04a69c495f721cf10400644a27b1c7e49
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
   your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <!-- Add your site or application content here -->
-  <div ui-view=""></div>
+<div id="holder">
+  <div id="body">
+    <!-- Add your site or application content here -->
+    <div ui-view=""></div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <label>Comments? Questions? Contact us at <a href="#">info@iHammer.com</a></label>
+    </div>
+  </footer>
+</div>
 
 <!--[if lt IE 9]>
 <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -75,8 +85,8 @@
 <script src="app/account/login/login.controller.js"></script>
 <script src="app/account/settings/settings.controller.js"></script>
 <script src="app/account/signup/signup.controller.js"></script>
-<script src="app/home/home.controller.js"></script>
-<script src="app/home/home.js"></script>
+<script src="app/dashboard/dashboard.controller.js"></script>
+<script src="app/dashboard/dashboard.js"></script>
 <script src="app/job/edit/edit.controller.js"></script>
 <script src="app/job/job.js"></script>
 <script src="app/job/view/view.controller.js"></script>
@@ -87,6 +97,7 @@
 <script src="app/profile/profile.js"></script>
 <script src="app/search/search.controller.js"></script>
 <script src="app/search/search.js"></script>
+<script src="app/star-rating/star-rating.directive.js"></script>
 <script src="app/thirdParty/blob/blob.js"></script>
 <script src="app/thirdParty/xml2json/xml2json.js"></script>
 <script src="components/auth/auth.service.js"></script>
