@@ -5,7 +5,7 @@ module.exports = function(app){
 	app.post('/createjob', contractController.createJob);
 	app.post('/editjob', contractController.editJob);
 	app.post('/endjob', contractController.endJob);
-	app.get('/gethistory', userController.getHistory);
+	app.get('/gethistory', contractController.getHistory);
   // app.route('/')
   //   .get(contractController.getContracts)
 };
