@@ -37,17 +37,10 @@ describe('Controller: SettingsCtrl', function () {
       summary: "I'm okay. I sleep all night and I work all day."
     };
 
-    var fakeWindow = {
-      location: {
-        href: ''
-      }
-    };
-
     // Create controller for testing
     createController = function() {
       SettingsCtrl = $controller('SettingsCtrl', {
-        $scope: $scope,
-        $window: fakeWindow
+        $scope: $scope
       });
     };
 

@@ -14,16 +14,9 @@ describe('Controller: SignupCtrl', function () {
     $form = $("<form />");
     $scope = $rootScope.$new();
 
-    var fakeWindow = {
-      location: {
-        href: ''
-      }
-    };
-
     createController = function() {
       SignupCtrl = $controller('SignupCtrl', {
-        $scope: $scope,
-        $window: fakeWindow
+        $scope: $scope
       });
     };
     createController();
