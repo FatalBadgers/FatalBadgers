@@ -31,9 +31,17 @@
       <a class="btn btn-primary btn-lg" href="/manage-contracts" role="button">Manage Contracts</a>
     </p>
 
+    <p ng-if="currentUser.account_type !== 'Worker'">
+      <a class="btn btn-primary btn-lg" href="/worker/search" role="button">Search Workers</a>
+    </p>
+
     <!--if user is worker-->
     <p ng-if="currentUser.account_type === 'Worker'">
       <a class="btn btn-primary btn-lg" href="/applications" role="button">Applications</a>
+    </p>
+
+    <p ng-if="currentUser.account_type === 'Worker'">
+      <a class="btn btn-primary btn-lg" href="/contract/search" role="button">Search Contracts</a>
     </p>
   </div>
 </div>
@@ -50,6 +58,4 @@
     <dt>User Rating</dt>
     <dd>{{currentUser.avg_rating}} </dd>
   </dl>
-
-  <p><a class="btn btn-primary btn-sm" href="/edit-profile" role="button">Edit Profile</a></p>
 </div>
