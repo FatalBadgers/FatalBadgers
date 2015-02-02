@@ -83,7 +83,7 @@
   },
   "scripts": {
     "start": "node server/app.js",
-    "test": "grunt test",
+    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },
   "private": true
