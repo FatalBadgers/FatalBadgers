@@ -13,6 +13,7 @@ var Client = app.get('models').Clients;
 var Jobs = app.get('models').Jobs;
 
 module.exports = {
+
   createJob: function(req, res, next) {
     var id_clients = req.body.id_clients,
       title = req.body.title,
@@ -43,6 +44,7 @@ module.exports = {
 
   },
 
+
   editJob: function(req, res, next) {
     var id_clients = req.body.id_clients,
       title = req.body.title,
@@ -69,10 +71,11 @@ module.exports = {
       });
     } else {
       console.log("In Edit Job controller method. Job does not exist.")
-    }
-    ;
+
+    };
 
   },
+  
 
   endJob: function(req, res, next) {
 
@@ -96,7 +99,6 @@ module.exports = {
   },
 
   getHistory: function(req, res, next) {
-
     var accountType = req.body.accountType;
 
     if(accountType === 'Worker') {
@@ -144,8 +146,10 @@ module.exports = {
         res.send(workers);
       });
   }
+
+
+// var Job = app.get('models').Jobs;
+
+
 };
-
-
-
 
