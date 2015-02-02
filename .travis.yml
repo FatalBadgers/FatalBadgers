@@ -1,8 +1,12 @@
 language: node_js
 node_js:
-  - '0.10'
   - '0.11'
 before_script:
   - npm install -g bower grunt-cli
   - bower install
-services: mongodb
+  - mysql -e 'create database ihammer;'
+env:
+  global:
+    - BUCKET=ihammer-dev
+    - secure=RmiOP2T23nnK24IuVQVBHOdFrVwAvv2nhM0e4obbtoAlV/KVZLb+laMG83xgk9JP2zGwFKjDZJTHcw5uR5SsRq6HQE6CBmX4+D6DAL5mZie64q5UtQC4B9d4YJquEfPm1qNJyyQrbW7M9LRbGsIVZvNewkI1lw95A/q/rBTQlwM=
+    - secure=T8GJM5mKFgODqkJdWCVsJ2DuHIJFQIb6amoQNH7VXqzcdeUyTOpPwpXJMd05p69jIsjeZ8rhf6kF1q4Vu/Y7eef2xuBu1OqAB+mUz3Q621xLToDXGE4+EkDL/V5zwPj6p8/mKakZF35oRstOm1xGSChL2WocuGc+vlEj5q/AOxI=

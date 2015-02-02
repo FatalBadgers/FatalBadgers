@@ -1,23 +1,16 @@
-'use strict';
+var Sequelize = require("sequelize");
 
 // Production specific configuration
 // =================================
 module.exports = {
-  // Server IP
-  ip:       process.env.OPENSHIFT_NODEJS_IP ||
-            process.env.IP ||
-            undefined,
-
-  // Server port
-  port:     process.env.OPENSHIFT_NODEJS_PORT ||
-            process.env.PORT ||
-            8080,
-
-  // MongoDB connection options
-  mongo: {
-    uri:    process.env.MONGOLAB_URI ||
-            process.env.MONGOHQ_URL ||
-            process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/badger'
-  }
+  ip: process.env.IP || undefined,
+  // Create a database connection and export it from this file.
+  // Connecting with the user "root", no password,
+  // and to the database "ihammer".
+  mysql: new Sequelize('ihammer_prod', 'FatalBadgers', 'FatalBadgers', {
+    host: process.env.DATABASE_HOST,
+    port: '3306',
+    dialect: 'mysql'
+  }),
+  port: 80
 };

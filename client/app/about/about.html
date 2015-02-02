@@ -1,0 +1,31 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12">
+      <center>
+        <table id="teamInfo">
+          <tr>
+            <td ng-repeat="member in team">
+              <label>
+                <h4>{{member.name}}</h4>
+                <img src="{{member.pic}}" class="profile-pic img-rounded">
+                <p>
+                  {{member.title}}<br>
+                  <a href="{{member.github}}">GitHub Profile</a>
+                </p>
+              </label>
+            </td>
+          </tr>
+        </table>
+      </center>
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <center>
+      <p class="lead">iHammer is a project we worked on at Hack Reactor and it's completely open source!<br>
+      <a href="https://github.com/FatalBadgers/FatalBadgers">Check out our repo on GitHub</a> to take a closer look under the hood.</p>
+    </center>
+  </div>
+</div>
