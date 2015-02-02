@@ -38,7 +38,7 @@ angular.module('badgerApp', [
     return attach;
   })
 
-  .run(function($rootScope, $location, $http, Auth) {
+  .run(function($rootScope, $state, $location, $http, Auth) {
 
     //attach aws config info to $rootscope
     $http.get('/api/config').success(function(config) {
@@ -55,7 +55,7 @@ angular.module('badgerApp', [
     $rootScope.$on('$stateChangeStart', function(evt, next, current) {
       var allowedPaths = ['/signup', '/login', '/about', '/'];
       if(next.name && allowedPaths.indexOf($location.path()) === -1 && !Auth.isAuth()) {
-        $location.path('/');
+        $state.go('main');
       }
     });
   });

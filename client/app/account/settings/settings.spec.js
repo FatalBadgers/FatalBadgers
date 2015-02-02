@@ -56,6 +56,7 @@ describe('Controller: SettingsCtrl', function () {
 
     // check that http requests are getting handled correctly
     $httpBackend.whenGET('/api/config').respond(200);
+    $httpBackend.whenGET('app/main/main.html').respond(200);
     $httpBackend.whenPOST('/api/user/getuser').respond(302);
     $httpBackend.whenPOST('/api/user/editprofile?accountType=Worker&email=test@test.com').respond(302);
 
@@ -84,6 +85,7 @@ describe('Controller: SettingsCtrl', function () {
 
     // check that http requests are getting handled correctly
     $httpBackend.whenGET('/api/config').respond(200);
+    $httpBackend.whenGET('app/main/main.html').respond(200);
     $httpBackend.whenPOST('/api/user/getuser').respond(302);
     $httpBackend.whenPOST('/api/user/editprofile?accountType=Client&email=test@test.com').respond(302);
 
