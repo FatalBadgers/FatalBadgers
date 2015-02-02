@@ -1,12 +1,10 @@
-'use strict';
-
 describe('Directive: starRating', function () {
 
-  // load the directive's module and view
+  //load the directive's module and view
   beforeEach(module('badgerApp'));
-  beforeEach(module('ihammer.templates'));
+  beforeEach(module('/app/star-rating/star-rating.html'));
 
-  var element, $httpBackend, $rootScope, $compile;
+  var $httpBackend, $rootScope, $compile;
 
   beforeEach(inject(function ($injector) {
     $httpBackend = $injector.get('$httpBackend');
@@ -18,11 +16,15 @@ describe('Directive: starRating', function () {
         bucket: 'ihammer-dev'
       }
     });
+    $httpBackend.flush();
 
     $rootScope.rating = 3;
-    element = $compile('<div star-rating rating-value="rating" max="5"></div>')($rootScope);
+    $compile('<div star-rating rating-value="rating" max="5"></div>')($rootScope);
     $rootScope.$digest();
   }));
+
+  afterEach(function() {
+  });
 
   it('should display correct ratingValue and max based on html attributes', inject(function () {
     expect($rootScope.$$childTail.max).toBe(5);

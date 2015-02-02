@@ -2,7 +2,7 @@ describe('Directive: photoupload', function() {
 
   // load the controller's module
   beforeEach(module('badgerApp'));
-  beforeEach(module('ihammer.templates'));
+  beforeEach(module(''));
   var $httpBackend;
   var $rootScope;
   var $compile;
