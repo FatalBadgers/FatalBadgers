@@ -7,4 +7,6 @@ module.exports = function(app){
   app.get('/viewprofile', userController.viewProfile);
   app.post('/editprofile', userController.editProfile);
   app.post('/getuser', userController.getUser);
+  app.post('/review', userController.review);
+
 };
