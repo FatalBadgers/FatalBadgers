@@ -73,9 +73,9 @@ module.exports = {
     };
 
   },
-  
-  endJob: function(req, res, next) {  
-   
+
+  endJob: function(req, res, next) {
+
     var id = req.body.id
 
     if(req.body) {
@@ -96,7 +96,7 @@ module.exports = {
   },
 
   getHistory: function(req, res, next) {
-    
+
     var accountType = req.body.accountType;
 
     if(accountType === 'Worker') {
@@ -117,7 +117,6 @@ module.exports = {
   }
 
 
-=======
 var Job = app.get('models').Jobs;
 
 module.exports = {
@@ -155,4 +154,3 @@ module.exports = {
 
 
 
-  
