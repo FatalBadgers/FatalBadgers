@@ -3,11 +3,7 @@
 angular.module('badgerApp')
   .directive('starRating', function() {
     return {
-      template: "<ul class='rating'>" +
-      "<li ng-repeat='star in stars' ng-class='star' ng-click='toggle($index)'>" +
-      "<i class='fa fa - star'></i>" +
-      "</li>" +
-      "</ul>",
+      templateUrl: 'app/star-rating/star-rating.html',
       restrict: 'A',
       scope: {
         ratingValue: "=",

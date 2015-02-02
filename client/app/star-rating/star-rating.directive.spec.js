@@ -2,6 +2,7 @@ describe('Directive: starRating', function () {
 
   //load the directive's module and view
   beforeEach(module('badgerApp'));
+  beforeEach(module('ihammer.templates'));
 
   var $httpBackend, $rootScope, $compile;
 
@@ -15,11 +16,6 @@ describe('Directive: starRating', function () {
         bucket: 'ihammer-dev'
       }
     });
-    // check that http requests are getting handled correctly
-    $httpBackend.whenGET('/api/config').respond(200);
-    $httpBackend.whenGET('app/main/main.html').respond(200);
-    $httpBackend.whenPOST('/api/user/getuser').respond(302);
-
     $httpBackend.flush();
 
     $rootScope.rating = 3;
@@ -31,13 +27,11 @@ describe('Directive: starRating', function () {
   });
 
   it('should display correct ratingValue and max based on html attributes', inject(function () {
-
     expect($rootScope.$$childTail.max).toBe(5);
     expect($rootScope.$$childTail.ratingValue).toBe(3);
   }));
 
   it('should display correct number of stars based on html attributes', inject(function () {
-
     expect($rootScope.$$childTail.stars.length).toBe(5);
   }));
 });
