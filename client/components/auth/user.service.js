@@ -11,7 +11,12 @@ angular.module('badgerApp')
         editProfile: {
           method: 'POST',
           params: {
-            controller: 'editprofile'
+            controller: 'editprofile',
+            name: null,
+            'hourly_rate': null,
+            'img_url': null,
+            'summary': null,
+            skills: null
           }
         },
         signup: {
@@ -33,7 +38,7 @@ angular.module('badgerApp')
             password: null
           }
         },
-        getuser: {
+        getUser: {
           method: 'POST',
           params: {
             controller: 'getuser'

@@ -1,5 +1,6 @@
 //we reference the models here
 //http://architects.dzone.com/articles/sequelize-javascript-orm
+<<<<<<< HEAD
 
 var Q = require('q'),
   jwt = require('jwt-simple');
@@ -59,4 +60,43 @@ module.exports = {
   }
 
 
+=======
+var Q = require('q');
+var express = require('express');
+var app = express();
+var Sequelize = require("sequelize");
+
+app.set('models', require('../models'));
+var Worker = app.get('models').Workers;
+
+module.exports = {
+  getWorkers: function(req, res, next) {
+    var query = req.query.q;
+    var queryParameters = {};
+
+    if(query) {
+      queryParameters = {
+        where: Sequelize.or({
+          name: {
+            like: '%' + query + '%'
+          }
+        }, {
+          skills: {
+            like: '%' + query + '%'
+          }
+        }),
+        limit: 10
+      }
+    }
+
+    Worker.findAll(queryParameters).
+      complete(function(err, workers) {
+        if(err) {
+          console.log(err);
+        }
+
+        res.send(workers);
+      });
+  }
+>>>>>>> 5663e6b185c2568a89c409e5a5b53053c177d6e2
 };
