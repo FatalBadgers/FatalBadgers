@@ -1,12 +1,7 @@
-.dashboard .btn.btn-primary.btn-lg{
-  margin-top: 30px;
+.quicklinks {
+  margin-top: 20px;
 }
 
-.dl-horizontal dd {
-  margin-top: -30px;
-}
-
-.dl-horizontal dt {
-  margin-top: 15px;
-  float: none!important;
+.quicklinks a:hover {
+  color: black;
 }
