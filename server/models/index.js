@@ -37,6 +37,8 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
   }
 }, {
   instanceMethods: {
+
+    // On login, we compare the hashed given password with the stored password
     comparePasswords: function(candidatePassword) {
       var defer = Q.defer();
       var savedPassword = this.password;
@@ -50,6 +52,8 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
       return defer.promise;
     }
   }, classMethods: {
+
+    // When we set password, we first hash and salt it for increased security
     setPassword: function(password) {
       var defer = Q.defer();
       bcrypt.genSalt(10, function(err, salt) {
@@ -94,6 +98,8 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
   }
 }, {
   instanceMethods: {
+
+    // On login, we compare the hashed given password with the stored password
     comparePasswords: function(candidatePassword) {
       var defer = Q.defer();
       var savedPassword = this.password;
@@ -107,6 +113,8 @@ exports.Clients = exports.ihammerDatabase.define("clients", {
       return defer.promise;
     }
   }, classMethods: {
+
+    // When we set password, we first hash and salt it for increased security
     setPassword: function(password) {
       var defer = Q.defer();
       bcrypt.genSalt(10, function(err, salt) {

@@ -18,6 +18,7 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/mocks', require('./api/mocks'));
 
+  // UserRouter contains functions for both Client and Worker 
   var userRouter = express.Router();
   app.use('/api/user', userRouter);
   require('./user/userRoute.js')(userRouter);
@@ -26,11 +27,12 @@ module.exports = function(app) {
   app.use('/api/contract', contractRouter);
   require('./contract/contractRoute.js')(contractRouter);
 
+  // UserRouter contains functions for both Client and Worker
   var workerRouter = express.Router();
   app.use('/api/worker', workerRouter);
   require('./worker/workerRoute.js')(workerRouter);
 
-  // aws config and s3 setup
+  // AWS config and S3 setup
   app.get('/api/config', api.getClientConfig);
   app.get('/api/s3Policy', aws.getS3Policy);
 

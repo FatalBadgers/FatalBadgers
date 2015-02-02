@@ -1,5 +1,7 @@
 var Sequelize = require("sequelize");
 
+// Staging specific configuration
+// =================================
 module.exports = {
   ip: process.env.IP || undefined,
   // Create a database connection and export it from this file.
