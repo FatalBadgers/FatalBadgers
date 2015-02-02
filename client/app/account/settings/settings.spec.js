@@ -46,8 +46,6 @@ describe('Controller: SettingsCtrl', function () {
 
   }));
 
-
-
   it('should send post request to update worker profile', function () {
     var data;
     $scope.user = exampleWorker;
