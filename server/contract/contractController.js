@@ -13,14 +13,15 @@ var Client = app.get('models').Clients;
 var Jobs = app.get('models').Jobs;
 
 module.exports = {
-  createJob: function(req, res, next){
+
+  createJob: function(req, res, next) {
     var id_clients = req.body.id_clients,
-        title = req.body.title,
-        hourly_rate = req.body.hourly_rate,
-        summary = req.body.summary,
-        skills_needed = req.body.skills_needed,
-        status = req.body.status,
-        img_url = req.body.img_url
+      title = req.body.title,
+      hourly_rate = req.body.hourly_rate,
+      summary = req.body.summary,
+      skills_needed = req.body.skills_needed,
+      status = req.body.status,
+      img_url = req.body.img_url
 
     var newJob = {
       title: title,
@@ -43,16 +44,17 @@ module.exports = {
 
   },
 
-  editJob: function(req, res, next){
-    var id_clients = req.body.id_clients,
-        title = req.body.title,
-        hourly_rate = req.body.hourly_rate,
-        summary = req.body.summary,
-        skills_needed = req.body.skills_needed,
-        status = req.body.status,
-        img_url = req.body.img_url;
 
-    if (req.body) {
+  editJob: function(req, res, next) {
+    var id_clients = req.body.id_clients,
+      title = req.body.title,
+      hourly_rate = req.body.hourly_rate,
+      summary = req.body.summary,
+      skills_needed = req.body.skills_needed,
+      status = req.body.status,
+      img_url = req.body.img_url;
+
+    if(req.body) {
       var edit = {
         title: title,
         'hourly_rate': hourly_rate,
@@ -69,12 +71,14 @@ module.exports = {
       });
     } else {
       console.log("In Edit Job controller method. Job does not exist.")
+
     };
 
   },
   
-  endJob: function(req, res, next) {  
-   
+
+  endJob: function(req, res, next) {
+
     var id = req.body.id
 
     if(req.body) {
@@ -95,7 +99,26 @@ module.exports = {
   },
 
   getHistory: function(req, res, next) {
-    
+    var accountType = req.body.accountType;
+
+    if(accountType === 'Worker') {
+
+      var query = {where: {id_workers: req.body.id_workers}};
+      WorkersJobs.find(query).complete(function(history) {
+        res.send(history);
+        res.end('You are in get history');
+      })
+
+    } else {
+      var query = {where: {id_clients: id_clients}};
+      ClientsJobs.find(query).complete(function(history) {
+        res.send(history);
+        res.end('You are in get history');
+      })
+    }
+  },
+
+  getContracts: function(req, res, next) {
     var query = req.query.q;
     var queryParameters = {};
 
@@ -130,7 +153,3 @@ module.exports = {
 
 };
 
-
-
-
-  

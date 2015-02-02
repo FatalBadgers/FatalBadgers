@@ -13,19 +13,17 @@ describe('Directive: photoupload', function() {
     $compile = $injector.get('$compile');
     $httpBackend = $injector.get('$httpBackend');
 
-    $httpBackend.expectGET('/api/config').respond({
+    $httpBackend.whenGET('/api/config').respond({
       awsConfig: {
         bucket: 'ihammer-dev'
       }
     });
     $httpBackend.flush();
 
-    createDirective = function() {
-      // Compile a piece of HTML containing the directive
-      $compile("<photoupload></photoupload>")($rootScope);
-      // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
-      $rootScope.$digest();
-    }
+    // Compile a piece of HTML containing the directive
+    $compile("<photoupload></photoupload>")($rootScope);
+    // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
+    $rootScope.$digest();
 
   }));
 
@@ -38,9 +36,6 @@ describe('Directive: photoupload', function() {
     });
     file.name = 'abc.jpeg';
     var files = [file];
-
-    createDirective();
-
     $httpBackend.expectGET('/api/s3Policy?mimeType=' + files[0].type)
       .respond({
         s3Policy: 'base64Policy',
@@ -75,8 +70,6 @@ describe('Directive: photoupload', function() {
     file2.name = 'xyz.bmp';
 
     var files = [file1, file2];
-
-    createDirective();
 
     files.forEach(function(file) {
       $httpBackend.expectGET('/api/s3Policy?mimeType=' + file.type)
@@ -116,8 +109,6 @@ describe('Directive: photoupload', function() {
     file2.name = 'xyz.bmp';
 
     var files = [file1, file2];
-
-    createDirective();
 
     files.forEach(function(file) {
       $httpBackend.expectGET('/api/s3Policy?mimeType=' + file.type)
@@ -163,9 +154,6 @@ describe('Directive: photoupload', function() {
     file2.name = 'xyz.bmp';
 
     var files = [file1, file2];
-
-    createDirective();
-
     files.forEach(function(file) {
       $httpBackend.expectGET('/api/s3Policy?mimeType=' + file.type)
         .respond({
