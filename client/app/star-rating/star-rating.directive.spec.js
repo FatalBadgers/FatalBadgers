@@ -4,18 +4,32 @@ describe('Directive: starRating', function () {
 
   // load the directive's module and view
   beforeEach(module('badgerApp'));
-  beforeEach(module('app/star-rating/star-rating.html'));
+  beforeEach(module('ihammer.templates'));
 
-  var element, scope;
+  var element, $httpBackend, $rootScope, $compile;
 
-  beforeEach(inject(function ($rootScope) {
-    scope = $rootScope.$new();
+  beforeEach(inject(function ($injector) {
+    $httpBackend = $injector.get('$httpBackend');
+    $rootScope = $injector.get('$rootScope');
+    $compile = $injector.get('$compile');
+
+    $httpBackend.whenGET('/api/config').respond({
+      awsConfig: {
+        bucket: 'ihammer-dev'
+      }
+    });
+
+    $rootScope.rating = 3;
+    element = $compile('<div star-rating rating-value="rating" max="5"></div>')($rootScope);
+    $rootScope.$digest();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<star-rating></star-rating>');
-    element = $compile(element)(scope);
-    scope.$apply();
-    expect(element.text()).toBe('this is the starRating directive');
+  it('should display correct ratingValue and max based on html attributes', inject(function () {
+    expect($rootScope.$$childTail.max).toBe(5);
+    expect($rootScope.$$childTail.ratingValue).toBe(3);
+  }));
+
+  it('should display correct number of stars based on html attributes', inject(function () {
+    expect($rootScope.$$childTail.stars.length).toBe(5);
   }));
 });
