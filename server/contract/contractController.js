@@ -7,6 +7,7 @@ var app = express();
 var Sequelize = require("sequelize");
 
 app.set('models', require('../models'));
+<<<<<<< HEAD
 
 var Worker = app.get('models').Workers;
 var Client = app.get('models').Clients;
@@ -96,6 +97,31 @@ module.exports = {
 
   getHistory: function(req, res, next) {
     
+    var accountType = req.body.accountType;
+
+    if(accountType === 'Worker') {
+
+      var query = {where: {id_workers: req.body.id_workers}};
+      WorkersJobs.find(query).complete(function(history) {
+        res.send(history);
+        res.end('You are in get history');
+      })
+
+    } else {
+      var query = {where: {id_clients: id_clients}};
+      ClientsJobs.find(query).complete(function(history) {
+        res.send(history);
+        res.end('You are in get history');
+      })
+    }
+  }
+
+
+=======
+var Job = app.get('models').Jobs;
+
+module.exports = {
+  getContracts: function(req, res, next) {
     var query = req.query.q;
     var queryParameters = {};
 
@@ -123,11 +149,7 @@ module.exports = {
         res.send(workers);
       });
   }
-
-
-// var Job = app.get('models').Jobs;
-
-
+>>>>>>> 5663e6b185c2568a89c409e5a5b53053c177d6e2
 };
 
 
