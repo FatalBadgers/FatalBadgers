@@ -2,7 +2,7 @@ describe('Directive: starRating', function () {
 
   //load the directive's module and view
   beforeEach(module('badgerApp'));
-  beforeEach(module('/app/star-rating/star-rating.html'));
+  beforeEach(module('ihammer.templates'));
 
   var $httpBackend, $rootScope, $compile;
 
