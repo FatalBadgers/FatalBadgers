@@ -8,10 +8,10 @@
 
 ## Team
 
-  - __Product Owner__: Yan Fan
-  - __Scrum Master__: Kevin Primat
-  - __Lead Architect__: Tim Martin
-  - __Build Master__: Scott Rice
+  - __Product Owner__: [Yan Fan](https://github.com/yanarchy)
+  - __Scrum Master__: [Kevin Primat](https://github.com/kxprim)
+  - __Lead Architect__: [Tim Martin](https://github.com/tmartin1)
+  - __Build Master__: [Scott Rice](https://github.com/scottrice10)
 
 ## Table of Contents
 
