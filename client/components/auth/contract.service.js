@@ -6,12 +6,13 @@ angular.module('badgerApp')
     return $resource('/api/contract/:controller', {
         accountType: '@accountType'
       },
-      
+
       {
         createJob: {
           method: 'POST',
           params: {
             controller: 'createJob',
+            id: null,
             title: null,
             'hourly_rate': null,
             summary: null,
@@ -25,6 +26,7 @@ angular.module('badgerApp')
           method: 'POST',
           params: {
             controller: 'editJob',
+            id: null,
             title: null,
             'hourly_rate': null,
             summary: null,
@@ -33,12 +35,13 @@ angular.module('badgerApp')
             'img_url': null
           }
         },
-        
+
         endJob: {
           method: 'POST',
           params: {
             controller: 'endJob',
-            title: title,
+            id: null,
+            title: null,
             status: 'complete'
           }
         },
@@ -51,10 +54,10 @@ angular.module('badgerApp')
         },
 
         getContracts: {
-        	method: 'GET',
-        	params: {
-        		controller: 'getContracts'
-        	}
+          method: 'GET',
+          params: {
+            controller: 'getContracts'
+          }
         }
       });
   });

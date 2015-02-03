@@ -11,7 +11,7 @@ angular.module('badgerApp')
     });
 
     $scope.updateProfile = function(form) {
-      if(form.$valid) {
+      if (form.$valid) {
         var updates = {
           name: $scope.user.name,
           location: $scope.user.location,
@@ -35,7 +35,7 @@ angular.module('badgerApp')
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
-      if(form.$valid) {
+      if (form.$valid) {
         Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
           .then(function() {
             $scope.message = 'Password successfully changed.';
