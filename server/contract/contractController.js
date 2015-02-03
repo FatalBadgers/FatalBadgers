@@ -1,6 +1,4 @@
-//we reference the models here
-//expecting models/index.js from Scott
-//http://architects.dzone.com/articles/sequelize-javascript-orm
+// We reference the models here
 var Q = require('q');
 var express = require('express');
 var app = express();
@@ -14,6 +12,7 @@ var Jobs = app.get('models').Jobs;
 
 module.exports = {
 
+  // Creates a new job, done by the Client
   createJob: function(req, res, next) {
     var id_clients = req.body.id_clients,
       title = req.body.title,
@@ -44,7 +43,7 @@ module.exports = {
 
   },
 
-
+  // A Client can update the information for a particular job
   editJob: function(req, res, next) {
     var id_clients = req.body.id_clients,
       title = req.body.title,
@@ -98,11 +97,13 @@ module.exports = {
 
   },
 
+  // Gets history of jobs done for a Client or Worker
   getHistory: function(req, res, next) {
     var accountType = req.body.accountType;
 
     if(accountType === 'Worker') {
 
+      // Gets jobs for Workers
       var query = {where: {id_workers: req.body.id_workers}};
       WorkersJobs.find(query).complete(function(history) {
         res.send(history);
@@ -110,6 +111,7 @@ module.exports = {
       })
 
     } else {
+      // Gets jobs for Clients
       var query = {where: {id_clients: id_clients}};
       ClientsJobs.find(query).complete(function(history) {
         res.send(history);
@@ -118,6 +120,7 @@ module.exports = {
     }
   },
 
+  // Get the contracts shared between a Worker and a Client
   getContracts: function(req, res, next) {
     var query = req.query.q;
     var queryParameters = {};
@@ -137,6 +140,7 @@ module.exports = {
       }
     }
 
+    // Retrieve all jobs from the Job table
     Job.findAll(queryParameters).
       complete(function(err, workers) {
         if(err) {
@@ -147,9 +151,6 @@ module.exports = {
       });
   }
 
-
 // var Job = app.get('models').Jobs;
-
-
 };
 
