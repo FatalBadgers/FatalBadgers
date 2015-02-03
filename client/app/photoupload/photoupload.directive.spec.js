@@ -58,4 +58,4 @@ describe('Directive: photoupload', function() {
 //     $httpBackend.flush();
 //   });
 
-// });
+});
