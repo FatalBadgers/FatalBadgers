@@ -18,7 +18,7 @@
         <span class="help-block" ng-show="profileForm.location.$error.required">Location cannot be blank.</span>
       </div>
 
-      <div id="workerQuestions" ng-show="isWorker">
+      <div id="workerQuestions" ng-if="isWorker">
         <div class="form-group">
           <label>What are your skills/professions?</label>
           <input class="form-control has-warning" ng-model="user.skills" name="skills" required>
@@ -39,8 +39,9 @@
           <textarea class="form-control" ng-model="user.summary"></textarea>
         </div>
 
-        <photoupload></photoupload>
       </div>
+
+      <photoupload></photoupload>
 
       <p class="help-block"> {{ message }} </p>
 

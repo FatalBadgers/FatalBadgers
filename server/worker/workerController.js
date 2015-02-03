@@ -7,6 +7,7 @@ app.set('models', require('../models'));
 var Worker = app.get('models').Workers;
 
 module.exports = {
+  // Retrive a specific worker from the Worker table
   getWorkers: function(req, res, next) {
     var query = req.query.q;
     var queryParameters = {};

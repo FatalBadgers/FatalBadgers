@@ -1,6 +1,7 @@
-//we reference the models here
-//expecting models/index.js from Scott
-//http://architects.dzone.com/articles/sequelize-javascript-orm
+// userController is the Parent Controller to Worker and Client.
+// All generic functions are present here.
+// For more specific function, check in worker/workerController.js
+
 var Q = require('q'),
   jwt = require('jwt-simple');
 var express = require('express');
@@ -12,6 +13,11 @@ var WorkerReviews = require('../models').WorkerReviews;
 var ClientReviews = require('../models').ClientReviews;
 
 module.exports = {
+
+  // Depending on whether the account is for a Worker or Client
+  // we will retrieve data from the corresponding table
+  // Check the Schema Layout in the FatalBadger WikiPage
+  
   signin: function(req, res, next) {
     var email = req.body.email,
       password = req.body.password,
@@ -60,7 +66,12 @@ module.exports = {
     }
   },
 
+  // Depending on whether the account is for a Worker or Client
+  // we will retrieve data from the corresponding table
+  // Check the Schema Layout in the FatalBadger WikiPage
   signup: function(req, res, next) {
+
+    // Collect information from the request
     var email = req.body.email,
       password = req.body.password,
       accountType = req.body.accountType,
@@ -72,6 +83,9 @@ module.exports = {
       newWorker,
       newClient;
 
+    // Depending on whether the account is for a Worker or Client
+    // we will retrieve data from the corresponding table
+    // Check the Schema Layout in the FatalBadger WikiPage
     if(accountType === 'Worker') {
       var skills = req.body.skills;
 
@@ -84,8 +98,9 @@ module.exports = {
             if(worker) {
               next(new Error('Worker already exists!'));
             } else {
-              console.log("user created");
-              // make a new user if not one
+              console.log("User created");
+
+              // Make a new user if doesn't yet exist
               newWorker = {
                 email: email,
                 accountType: accountType,
@@ -100,8 +115,10 @@ module.exports = {
                 newWorker.img_url = img_url;
               }
 
+
               Worker.setPassword(password).then(function(password) {
                 newWorker.password = password;
+                // Save password to database here
                 Worker.build(newWorker).save().complete(function(err, worker) {
                   // create token to send back for auth
                   if(err) {
@@ -116,7 +133,7 @@ module.exports = {
           }
         })
     } else {
-      // check to see if user already exists
+      // Check to see if user already exists
       Client.find({where: {email: email}})
         .complete(function(err, client) {
           if(err) {
@@ -126,7 +143,8 @@ module.exports = {
               next(new Error('Client already exist!'));
             } else {
               console.log("client created");
-              // make a new user if not one
+              
+              // Make a new user if not one
               newClient = {
                 email: email,
                 password: Client.setPassword(password),
@@ -159,11 +177,14 @@ module.exports = {
     }
   },
 
+  // Function isn't used, use instead at getUser
+  // Can be deleted
   viewProfile: function(req, res, next) {
     var accountType = req.body.accountType,
       email = req.body.email;
 
     if(accountType === 'Worker') {
+      // Search user in corresponding table
       var query = {where: {email: email}};
       Worker.find(query).complete(function(profile) {
         res.send(profile);
@@ -208,6 +229,7 @@ module.exports = {
           res.send({affectedRows: affectedRows});
         });
       } else {
+        // TODO: Add modal alert on client side
         console.log("In Edit Profile controller method. Worker does not exist.")
       }
     } else {
@@ -229,11 +251,14 @@ module.exports = {
           res.send({affectedRows: affectedRows});
         });
       } else {
+        // TODO: Add modal alert on client side
         console.log("In Edit Profile controller method. Worker does not exist.")
       }
     }
   },
 
+  // Can view the profile of a Worker or Client
+  // On app, is used to view a profile and view/update the 'Settings' page
   getUser: function(req, res, next) {
     var accountType = req.body.accountType,
       email = req.body.email,
@@ -262,6 +287,7 @@ module.exports = {
     }
   },
 
+  // A Client or Worker adds a review for the person they worked with
   review: function(req, res, next) {
     var accountType = req.body.accountType,
         id = req.body.id,

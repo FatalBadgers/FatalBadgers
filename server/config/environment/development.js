@@ -1,5 +1,7 @@
-var Sequelize = require("sequelize");
+var Sequelize = require('sequelize');
 
+// Development specific configuration
+// =================================
 module.exports = {
   // Create a database connection and export it from this file.
   // Connecting with the user "root", no password,
@@ -11,5 +13,3 @@ module.exports = {
   }),
   port: 9000
 };
-
-

@@ -1,3 +1,43 @@
-<div class="col-md-12">
-This is the create view.
+<div class="container">
+  <div>
+    <h1>Create a Job</h1>
+  </div>
+  <div>
+    <form class="form" name="form" ng-submit="create(form)" novalidate>
+      
+      <h3>Profile Information</h3>
+      <div class="form-group">
+        <label>Title</label>
+        <input class="form-control has-warning" ng-model="job.title" name="title" placeholder="iPhone 6 screen needs replacing" required>
+        <span class="help-block" ng-show="form.name.$error.required && submitted">Title cannot be blank.</span>
+      </div>
+
+      <div class="form-group">
+        <label>Hourly Rate</label>
+        <input class="form-control has-warning" ng-model="job.hourly_rate" name="hourly_rate" placeholder="What is your budget?" required>
+        <span class="help-block" ng-show="form.location.$error.required && submitted">Hourly rate cannot be blank.</span>
+      </div>
+
+			<div class="form-group">
+        <label>Summary</label>
+        <input class="form-control has-warning" ng-model="job.summary" name="summary" placeholder="Tell us more." required>
+        <span class="help-block" ng-show="form.location.$error.required && submitted">Summary cannot be blank.</span>
+      </div>
+
+
+      <div class="form-group">
+        <label>Skills Needed</label>
+        <textarea class="form-control has-warning" ng-model="job.skills_needed" name="skills_needed" placeholder="What are the skills your job requires?" required></textarea>
+        <span class="help-block" ng-show="form.location.$error.required && submitted">Skills needed cannot be blank.</span>
+      </div>
+
+
+      <div>
+        <button class="btn btn-lg btn-default" type="submit">
+          Create Job
+        </button>
+      </div>
+
+    </form>
+  </div>
 </div>

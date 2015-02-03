@@ -21,10 +21,8 @@ var all = {
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
     session: 'badger-secret'
-  },
+  }
 
-  // List of user roles
-  userRoles: ['guest', 'user', 'admin']
 };
 
 // Export the config object based on the NODE_ENV

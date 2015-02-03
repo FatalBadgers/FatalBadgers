@@ -12,6 +12,7 @@ angular.module('badgerApp')
           method: 'POST',
           params: {
             controller: 'createJob',
+            id: null,
             title: null,
             'hourly_rate': null,
             summary: null,
@@ -25,6 +26,7 @@ angular.module('badgerApp')
           method: 'POST',
           params: {
             controller: 'editJob',
+            id: null,
             title: null,
             'hourly_rate': null,
             summary: null,
@@ -38,7 +40,8 @@ angular.module('badgerApp')
           method: 'POST',
           params: {
             controller: 'endJob',
-            title: title,
+            id: null,
+            title: null,
             status: 'complete'
           }
         },

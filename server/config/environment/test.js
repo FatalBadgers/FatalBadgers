@@ -1,4 +1,6 @@
-var Sequelize = require("sequelize");
+'use strict';
+
+var Sequelize = require('sequelize');
 
 module.exports = {
   // Create a database connection and export it from this file.
