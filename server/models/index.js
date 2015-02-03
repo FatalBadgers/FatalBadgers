@@ -9,8 +9,8 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
   location: {
-      type: Sequelize.STRING,
-      defaultValue: 'No location provided'
+    type: Sequelize.STRING,
+    defaultValue: 'No location provided'
   },
   email: Sequelize.STRING,
   skills: Sequelize.TEXT,
@@ -77,7 +77,10 @@ exports.Workers = exports.ihammerDatabase.define("workers", {
 exports.Clients = exports.ihammerDatabase.define("clients", {
   name: Sequelize.STRING,
   password: Sequelize.STRING,
-  location: Sequelize.STRING,
+  location: {
+    type: Sequelize.STRING,
+    defaultValue: 'No location provided'
+  },
   email: Sequelize.STRING,
   'avg_rating': {
     type: Sequelize.STRING,
